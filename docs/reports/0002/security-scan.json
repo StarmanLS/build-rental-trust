@@ -1,0 +1,27 @@
+{
+  "candidate_files_scanned": 66,
+  "credential_pattern_findings": [],
+  "runtime_auth_secret_found_in_candidates": false,
+  "symlinks": [],
+  "binary_files_require_visual_review": [
+    "docs/evidence/agent-viewings-desktop.jpg",
+    "docs/evidence/agreements-desktop.jpg",
+    "docs/evidence/agreements-mobile.jpg",
+    "docs/evidence/handover-desktop.jpg",
+    "docs/evidence/handover-mobile.jpg",
+    "docs/evidence/role-selection-desktop.jpg",
+    "docs/evidence/viewings-mobile.jpg"
+  ],
+  "known_fictional_password_or_placeholder_files": [
+    ".env.example",
+    ".github/workflows/checks.yml",
+    "DEVELOPMENT-CHECKPOINT.md",
+    "README.md",
+    "app/page.tsx",
+    "docs/reports/0001/DEVELOPMENT-CHECKPOINT.md",
+    "docs/reports/0002/previous-DEVELOPMENT-CHECKPOINT.md",
+    "server/main.ts"
+  ],
+  "source_manifest_unchanged": true,
+  "limits": "Pattern matching is not a guarantee of absence; synthetic fixture credentials are intentional. Local database was not opened or changed."
+}

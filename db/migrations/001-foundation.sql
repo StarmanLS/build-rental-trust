@@ -1,0 +1,15 @@
+ CREATE TABLE auth_user(id text PRIMARY KEY,name text NOT NULL,email text NOT NULL UNIQUE,email_verified boolean NOT NULL DEFAULT false,image text,created_at timestamp NOT NULL,updated_at timestamp NOT NULL);
+ CREATE TABLE auth_session(id text PRIMARY KEY,expires_at timestamp NOT NULL,token text UNIQUE NOT NULL,created_at timestamp NOT NULL,updated_at timestamp NOT NULL,ip_address text,user_agent text,user_id text NOT NULL REFERENCES auth_user(id));
+ CREATE TABLE auth_account(id text PRIMARY KEY,account_id text NOT NULL,provider_id text NOT NULL,user_id text NOT NULL REFERENCES auth_user(id),access_token text,refresh_token text,id_token text,access_token_expires_at timestamp,refresh_token_expires_at timestamp,scope text,password text,created_at timestamp NOT NULL,updated_at timestamp NOT NULL);
+ CREATE TABLE auth_verification(id text PRIMARY KEY,identifier text NOT NULL,value text NOT NULL,expires_at timestamp NOT NULL,created_at timestamp,updated_at timestamp);
+ CREATE INDEX auth_session_user_idx ON auth_session(user_id);
+ CREATE TABLE properties(id uuid PRIMARY KEY,label text NOT NULL,address text NOT NULL,kind text NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+ CREATE TABLE claims(id uuid PRIMARY KEY,property_id uuid NOT NULL REFERENCES properties(id),user_id text NOT NULL REFERENCES auth_user(id),role text NOT NULL CHECK(role IN ('owner','property_manager')),status text NOT NULL DEFAULT 'unverified',UNIQUE(property_id,user_id));
+ CREATE TABLE tenancies(id uuid PRIMARY KEY,property_id uuid NOT NULL REFERENCES properties(id),creator_id text NOT NULL REFERENCES auth_user(id),start_date date NOT NULL,end_date date NOT NULL,rent_minor integer NOT NULL CHECK(rent_minor>0),status text NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','invitation_sent','mutually_confirmed')),version integer NOT NULL DEFAULT 1,created_at timestamptz NOT NULL DEFAULT now(),CHECK(end_date>start_date));
+ CREATE TABLE participants(tenancy_id uuid NOT NULL REFERENCES tenancies(id),user_id text NOT NULL REFERENCES auth_user(id),role text NOT NULL,accepted_version integer,PRIMARY KEY(tenancy_id,user_id));
+ CREATE TABLE invitations(id uuid PRIMARY KEY,tenancy_id uuid NOT NULL REFERENCES tenancies(id),email text NOT NULL,token_hash text NOT NULL,status text NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','accepted','declined','revoked')),expires_at timestamptz NOT NULL,version integer NOT NULL,created_at timestamptz DEFAULT now());
+ CREATE UNIQUE INDEX one_pending_invite ON invitations(tenancy_id) WHERE status='pending';
+ CREATE TABLE events(id uuid PRIMARY KEY,tenancy_id uuid REFERENCES tenancies(id),actor_id text REFERENCES auth_user(id),action text NOT NULL,detail text NOT NULL,created_at timestamptz DEFAULT now());
+ CREATE TABLE mail(id uuid PRIMARY KEY,recipient text NOT NULL,subject text NOT NULL,link text NOT NULL,created_at timestamptz DEFAULT now(),synthetic boolean NOT NULL DEFAULT true);
+ CREATE INDEX tenancy_creator ON tenancies(creator_id); CREATE INDEX participants_user ON participants(user_id);
+ CREATE INDEX events_tenancy ON events(tenancy_id,created_at);

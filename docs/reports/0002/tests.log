@@ -1,0 +1,61 @@
+
+> rental-trust-local@0.1.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ signup persists a hashed account and delivers only to test mailbox (2349.606ms)
+✔ real email signup is denied by server (6.404708ms)
+2026-11-11T01:31:42.537Z WARN [Better Auth]: Rate limiting could not determine a client IP and is falling back to a single shared per-path bucket. Ensure your runtime forwards a trusted client IP header, then set `advanced.ipAddress.ipAddressHeaders` or `advanced.ipAddress.trustedProxies` so the address can be resolved.
+✔ unverified email cannot log in (68.583666ms)
+✔ verification link allows login and persisted session (87.297208ms)
+2026-11-11T01:31:42.686Z WARN [Better Auth]: Invalid password
+✔ invalid password denied (64.543541ms)
+✔ signout revokes the existing session (8.512ms)
+2026-11-11T01:31:42.847Z WARN [Better Auth]: Invalid password
+✔ password recovery works once and does not retain old credentials (222.387041ms)
+✔ property persists with unverified claim and no inferred ownership (3101.658209ms)
+✔ unrelated user cannot see records or audit events (3.308792ms)
+✔ unrelated user cannot create tenancy on claimed property (4.587125ms)
+✔ invalid dates and extra privilege fields rejected (4.485583ms)
+✔ invitation stores a digest, not the raw secret (7.896459ms)
+✔ wrong recipient and wrong secret denied (7.690542ms)
+✔ acceptance is atomic and repeated acceptance has one effect (11.317791ms)
+✔ decline creates no participant and allows new invitation (6.493375ms)
+✔ revocation blocks future acceptance (5.480167ms)
+✔ expired invitation fails (5.629708ms)
+✔ stale version cannot be accepted (5.089417ms)
+✔ unverified email cannot accept (4.958709ms)
+✔ duplicate pending invite and self-invitation denied (7.18975ms)
+✔ rollback preserves no partial property or audit on failed claim (1.898625ms)
+✔ reopen persistent database preserves state and migration is non-destructive (97.972791ms)
+✔ one account retains both roles and independent setup completion (21.909875ms)
+✔ role switching grants no access to unrelated records (5.097583ms)
+✔ admin role and unsupported setup fields denied (0.469167ms)
+✔ agent viewing visible only to recording agent and named tenant (31.428875ms)
+✔ only the tenant confirms and can later dispute a viewing (15.659708ms)
+✔ viewing rejects duplicates, future dates, self and unclaimed property (8.917416ms)
+✔ evidence requires a mutually confirmed tenancy and resource relationship (3080.450833ms)
+✔ immutable versions preserve bytes, fingerprints and participant access (17.799125ms)
+✔ cross-tenancy download and response are denied including forged document IDs (10.350667ms)
+✔ concurrent uploads get separate versions and duplicate bytes are rejected (11.984ms)
+✔ PDF stays quarantined and cannot be downloaded or acknowledged (11.005334ms)
+✔ invalid types, binary text, malformed base64, oversized and unsynthetic input rejected (11.532ms)
+✔ stamping evidence must pair to an agreement in the same tenancy (17.439959ms)
+✔ receipt and dispute are version-bound, append-only and idempotent (15.580875ms)
+✔ evidence and responses survive database reopen (123.65025ms)
+✔ handover requires confirmed tenancy and relationship access (3034.105167ms)
+✔ unrelated user cannot create, read or export records (17.351875ms)
+✔ concurrent versions preserve observations and generate distinct item IDs (13.413916ms)
+✔ invalid readings, keys, duplicate labels, future dates and spoofed IDs are rejected (9.53525ms)
+✔ move-out requires same-tenancy move-in baseline and chronological observations (20.439958ms)
+✔ responses require the other party and an item belonging to that version (12.150666ms)
+✔ disputes require a note; responses are replay-safe and history retained (15.483833ms)
+✔ export retains all versions, pending items and disagreements without financial decisions (14.866459ms)
+✔ handover versions and responses persist after reopening (112.953083ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4073.612166
