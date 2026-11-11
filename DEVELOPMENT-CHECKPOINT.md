@@ -1,18 +1,13 @@
-# Verified continuation checkpoint — 0001
+# Checkpoint — Prompt 002
 
 ## I. Continuation checkpoint
-- Project: `/Users/lesh/Desktop/Intan/rental-trust-app`; synthetic-only modular local app; no Git branch/commit.
-- Last verified functionality: linked move-in/out records, item dispute and reload persistence; previous auth, roles, tenancy/invitation, agent viewing and agreement flows remain covered by regression tests.
-- Current stage: D3 partial. Last fully completed source requirement: none promoted this cycle; last verified implementation slice: MB-15/19 handover records.
-- Outstanding issues: RT-001–008. Exact next task: H, pending approval.
-- Continuation files: root `PROJECT-STATUS.md`, `DEVELOPMENT-REPORT.md`, `DEVELOPMENT-CHECKPOINT.md`, `KNOWN-ISSUES.md`, `NEXT-STEPS.md`; `server/handover.ts`, `app/handover-panel.tsx`, `db/migrations/005-handovers.sql`, `tests/handover.test.ts`; canonical research `requirements.json`, `IMPLEMENTATION-PLAN.md`, `RESEARCH-TO-REQUIREMENTS.md`; `docs/reports/0001/*`.
-- Preview: http://localhost:5199/ → Handover. Running at checkpoint; if absent, start `npm run dev` from the app folder. Preserve `.local/postgres` and `.local/auth-secret`. Do not touch unrelated INTAN apps or ports.
-- Protocol: every future cycle must update the five required files, archive important previous reports, compute exact register counts, return sections A–I in the conversation, recommend one task and stop for approval.
+- App: /Users/lesh/Desktop/Intan/rental-trust-app.
+- Git: main tracks origin/main; HTTPS remote above; initial implementation commit 82cfaacb7ace56ac9380138adc5c7c35759e2152. Resolve final documentation delivery hash from HEAD, with matching remote verified in final response.
+- Last verified functionality: existing 46 test cases pass, including handover/evidence persistence/permissions. Browser verification is inherited from cycle 0001, not repeated.
+- Stage: Prompt 002 source-control delivery; product D3 partial.
+- Last completed task: initial baseline commit/push. No full product requirement promoted to TESTED.
+- Outstanding: RT-002–009 and full product backlog. Next exact task is H, pending approval.
+- Continue from five root reports, docs/reports/0002, README, existing tests and server modules. Preserve .local and historical reports. Do not touch INTAN/MyilmiAI projects.
+- Preview address: http://localhost:5199/ when the existing local server is running; runtime was not restarted in this task.
+- Reporting protocol: archive previous results, maintain five reports and exact counts, provide A–I and stop for next prompt.
 
-
-## Verification and runtime
-46/46 automated tests; build/typecheck passed. Fresh/reopen PGlite and migration 005 passed. Dedicated server PostgreSQL and HTTP negative-route suite not run. Browser exercised tenant move-in → manager dispute → manager move-out → reload comparison. Mobile overflow measurement 390/390. Export tested at service level; browser download not run.
-
-Current owned preview session at write time: 73493, port 5199; do not assume session handles survive a new chat. Inspect the listener before restarting. Local test users are manager@example.invalid, tenant@example.invalid, outsider@example.invalid; initial fictional password LocalRental!2026. They are local fixtures only. Server rejects NODE_ENV=production. Existing INTAN apps are unrelated.
-
-Before starting next cycle: read latest report and issue list, confirm owner authorized recommended task, inspect actual filesystem and Git state, preserve database and historical reports. Archive the previous latest report to a uniquely numbered docs/reports directory before replacement. Use the canonical requirements JSON to compute all counts and retain register snapshots. Never infer full requirement completion from a single passing test. Return the full A–I report and stop for the next prompt.

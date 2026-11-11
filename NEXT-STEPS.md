@@ -1,16 +1,12 @@
-# Next steps — approval required
+# Next task — approval required
 
 ## H. Recommended next task
-**Create a version-controlled, reproducible verification baseline.**
-- Objective: initialize only the isolated rental app repository, review exclusions, commit the verified source, and add HTTP-level auth/origin/resource-isolation tests for the handover/evidence routes.
-- Requirements: MB-25/27/31/32/33/36/37.
-- Priority reason: every added module increases recovery and regression risk while no commit or route-boundary test baseline exists.
-- Dependencies: owner approval for this next task; local runtime and existing synthetic fixtures. No production service needed.
-- Expected result: identified branch/commit, reproducible local checks and recorded endpoint-level permission results; no claim of deployment readiness.
-- Required tests: clean-install/build/typecheck; existing 46 tests; unauthenticated/incorrect-origin/unrelated-user upload/list/download/respond/export requests; oversized/malformed requests; successful authenticated route journey; verify private state excluded from Git.
+**HTTP-level security regression coverage for evidence and handover APIs.**
+- Objective: test real request authentication, origins, relationship permissions, downloads, responses, exports and malformed/oversized bodies using isolated synthetic test data.
+- Requirements: MB-27/31/32.
+- Priority: service tests pass, but endpoint middleware/security boundaries have not been exercised by an automated negative-route suite.
+- Dependencies: existing Git baseline and local test runtime; owner approval for next task. No real data or production provider needed.
+- Expected result: repeatable route tests and fixes only for demonstrated defects, with preserved UI/database behavior.
+- Tests: unauthenticated and unrelated users; incorrect origins; valid participants; cross-version IDs; PDF quarantine; malformed/oversized payloads; download headers; existing 46 regressions/build/typecheck.
+- Not started. Stop after Prompt 002 and wait for approval.
 
-This next task has **not started**. Stop and wait for the next development prompt.
-
-
-## Later backlog (not authorized as the next task)
-Complete handover evidence/media and exit pack; production file pipeline; maintenance; payments and rental passport; real-data and production readiness. Do not begin these merely because they appear here.

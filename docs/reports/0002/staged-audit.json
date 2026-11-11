@@ -1,0 +1,9 @@
+{
+  "staged_files_reviewed": 72,
+  "credential_findings": [],
+  "private_runtime_paths_tracked": false,
+  "source_unchanged": true,
+  "synthetic_screenshots_reviewed": 7,
+  "known_test_credentials": "Fictional local-account and isolated CI fixture passwords intentionally retained; no live authentication tokens",
+  "audit_scope": "Actual Git index blobs; pattern scan plus known runtime-secret comparison, not an independent security audit"
+}
