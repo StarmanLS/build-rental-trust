@@ -1,41 +1,37 @@
 # BUILD RENTAL TRUST — DEVELOPMENT REPORT
 
 ## Report information
-- Prompt number: 002 — Connect Existing Application to GitHub.
-- Date/time: 11 November 2026, 09:33 MYT (UTC+08).
-- Stage: source-control baseline and GitHub connection; no feature development.
-- Current branch: main; upstream origin/main.
+- Prompt number: 003 (owner: “continue with development”; recommended HTTP verification task).
+- Date/time: 11 November 2026, 13:46 MYT.
+- Development stage: API security verification; product D3 remains partial.
+- Current branch: main, tracking origin/main at checkpoint start.
+- Latest implementation commit: ba0b8f3e6d6cff287ee076fbad19ed4d6e815142. The follow-up commit containing these reports is resolved with git rev-parse HEAD and supplied in the final response after remote verification.
 - Repository: https://github.com/StarmanLS/build-rental-trust.git
-- Verified initial implementation commit: 82cfaacb7ace56ac9380138adc5c7c35759e2152.
-- Latest verified published commit at final checkpoint preparation: 16fc5eb77fe448b195d19379414f6e3b1fcfbd91 (application/report delivery). This final verification snapshot is a subsequent documentation-only commit; resolve its own identifier with `git rev-parse HEAD`. The final response reports that delivery identifier. A commit cannot embed its own hash.
-- Overall status: application PARTIAL; GitHub application and report delivery verified. The final verification snapshot records those completed results.
+- Overall project status: PARTIAL. This bounded HTTP verification cycle passed; whole-system and production completion remain outstanding.
 
 ## A. Work completed
-| Requirement / instruction | Description and actual implementation | Files changed | Status |
+| Requirement | Description / actual implementation | Files changed (relative to app root) | Current status |
 |---|---|---|---|
-| Prompt 002: 1–4, 7–9; MB-25/37 | Verified the existing app, found no Git repository, initialized only this directory on main, set origin, confirmed the remote had no advertised refs before first push. No new app or unrelated project access. | Repository-local .git metadata | Git setup complete |
-| Prompt 002: 5–6, 14; MB-31 | Expanded exclusions for secrets, environment files, credentials, local database/uploads, private documents, dependencies/build output. Scanned candidates for credential patterns and the actual local auth secret without displaying it; reviewed synthetic screenshots. | .gitignore; docs/reports/0002/security-scan.json | Implemented and checked; bounded scan, not a security audit |
-| Prompt 002: 10–12 | Created reviewed 67-file initial commit and pushed main without force. Tracking origin/main established using HTTPS and osxkeychain credential helper. Local commit identity: StarmanLS <StarmanLS@users.noreply.github.com>; GitHub account attribution was not independently verified. | Initial commit and local Git configuration | Initial push successful |
-| Prompt 002: 13; MB-32 | Reran existing 46 tests, build and typecheck. SHA-256 comparison verified app/server/tests/database/scripts/config/dependency source unchanged. | Test/build/typecheck logs and source manifest under docs/reports/0002 | Executed successfully |
-| Prompt 002: 15; MB-33/36 | Updated five mandatory reports and preserved previous versions, requirement snapshot and prior history. | PROJECT-STATUS.md, DEVELOPMENT-REPORT.md, DEVELOPMENT-CHECKPOINT.md, KNOWN-ISSUES.md, NEXT-STEPS.md; docs/reports/0002 | Updated and delivered to GitHub |
+| MB-25/27/31 | Extracted existing Express API mounting into a shared module used by the Nest bootstrap and real-HTTP tests. All existing middleware before the error handler is byte-identical after substituting the injected database variable. | server/api.ts, server/main.ts | PARTIAL broader requirements; extraction verified |
+| MB-27/31/32 | Added 13 tests using real HTTP, Better Auth login cookies, an ephemeral loopback listener and isolated in-memory PGlite. Covers protected evidence/handover routes and security/error boundaries. | tests/http.test.ts | Scoped suite executed successfully |
+| MB-31/32; RT-010 | Fixed demonstrated unsupported-charset parser error returning HTML. Unsupported charset/encoding now returns bounded JSON 415; unexpected parser middleware failures return generic JSON 500. | server/api.ts | Demonstrated charset regression fixed and tested; all fallback branches not independently fault-injected |
+| MB-33/36 | Updated five report files, archived previous versions, preserved first failures and final test/build/typecheck evidence, retained all requirement IDs. | Root report files; docs/reports/0003/*; README.md | Reporting cycle completed |
 
-No UI, login, backend behavior, database schema, dependency or feature change. Owner explicitly chose GitHub-only with current UI preserved. The local runtime database was not opened, reset, migrated or replaced by this task. Existing research outside the app remains untouched and is not copied into this repository; previously embedded research/requirement snapshots are preserved. Some historical links to sibling research therefore require the original workspace.
+UI, auth configuration, domain services, database migrations and dependency inputs unchanged. No new product module or AI integration. Tests never used or modified .local/postgres or the preview port. No unrelated project accessed. The existing preview process was not restarted; new middleware loads on its next restart.
 
 ## B. Tests and verification
-- Automated: 46 executed, 46 passed, 0 failed, 0 skipped. `npm test`; docs/reports/0002/tests.log.
-- Build: PASS; `npm run build`; docs/reports/0002/build.log.
-- Typecheck: PASS; `npm run typecheck`; docs/reports/0002/typecheck.log.
-- Database: temporary PGlite migration/reopen/transaction tests passed as part of the existing suite. Live .local database unchanged by this task. Standard server PostgreSQL not run.
-- Browser/E2E: not rerun; no UI change. Historical browser evidence retained, not claimed as newly executed.
-- Security: credential-pattern scan found no potential live-key matches; actual local auth secret absent from candidates. No symlinks in candidate set. Known fixture passwords and CI-only credentials remain intentionally in source/tests/docs; .env.example has a placeholder, not a live password. Seven screenshots contain synthetic app records. Personal workspace paths remain in historical reports, as documentation metadata.
-- Exclusions checked using git check-ignore and tracked-file listing: .local, auth secret, local database, .env variants, node_modules, .next, uploads/private documents excluded. Build cache excluded. No live credentials or runtime state intentionally committed; pattern matching cannot prove absence of every possible secret.
-- Source preservation: before/after SHA-256 manifest matches for runtime source, tests, migrations, scripts and package/config inputs. No source edits to pass checks.
-- Git: initial normal push succeeded; 67 files in initial baseline. Documentation push succeeded and git ls-remote confirmed GitHub main equals local 16fc5eb77fe448b195d19379414f6e3b1fcfbd91. No force push. The final verification snapshot adds documentation only.
-- Problems encountered: sandbox network lookup failed (Could not resolve host: github.com); approved network access succeeded. No Git author configured; repository-local GitHub-handle/no-reply identity used and disclosed. Normal diff whitespace check flagged trailing blank lines in preserved npm output logs; check with only blank-at-EOF warnings disabled passed; source/log history not rewritten.
-- Not executed: clean npm ci, hosted GitHub Actions status check, server PostgreSQL suite, new HTTP route tests, security audit, accessibility/load/restore tests. No claims about hosted CI success.
+- Final automated suite: **59 executed, 59 passed, 0 failed, 0 skipped**, including the previous 46 and 13 new HTTP tests. Evidence: docs/reports/0003/tests.log.
+- Build PASS: docs/reports/0003/build.log. Typecheck PASS: docs/reports/0003/typecheck.log.
+- Database: existing migration/reopen/transaction tests passed; HTTP fixtures used separate in-memory PGlite and closed it afterward. Server PostgreSQL not executed.
+- HTTP/E2E: real network requests exercised sign-up/login fixture setup, session cookies, evidence upload/list/download, receipt replay, PDF quarantine, handover responses/export and logout. Email verification for fixture users was set directly in the isolated database; independent verification was not claimed.
+- Security/permissions: unauthenticated and forged-session denial; unverified-session denial; missing/foreign origin and foreign Host denial; unrelated list/upload/download/respond/export denial; draft-tenancy gating; own-upload/own-handover response denial; exact item/version binding; export tenancy isolation; safe attachment/no-store/nosniff/frame/CSP headers; JSON/size/input errors; unsupported routes/methods; logout revocation.
+- Refactor verification: existing routing/middleware text preserved apart from database injection and error handler. UI, migrations, auth/domain and package inputs match prior commit; see refactor-verification.json.
+- Failure history retained: first HTTP attempt could not bind loopback (EPERM), causing all 13 tests to fail setup; approved execution resolved environment restriction. Next run hit auth fixture rate limiting (429), again failing setup; distinct synthetic forwarded client addresses fixed test isolation without disabling limits. First functional run: 11 passed / 2 failed (one Host-test client issue, one actual charset error-response defect). Raw node:http Host request corrected the test; parser fix corrected the defect. A test helper initially inferred a UUID template-literal argument type; explicit string annotation fixed the typecheck error. Final run passed.
+- Logs: http-first.log (listener restriction), http-before-fix.log (fixture throttling), http-defect.log (11/13), tests.log (59/59). No earlier failure deleted or presented as a pass.
+- Not executed: browser UI checks, live-preview restart/smoke, hosted CI status, standard PostgreSQL, clean dependency install, load/security/accessibility audits, backup restore. Unknown middleware-error fallback and unsupported compression branches were not separately fault-injected; the reproduced unsupported-charset branch was tested. No production-readiness claim.
 
 ## C. Requirement status
-Authoritative snapshot for this task: docs/reports/0002/requirements.json, preserved from cycle 0001. No requirement statuses changed or IDs added/removed.
+Source: unchanged docs/reports/0003/requirements.json, preserved from prior canonical snapshot. No IDs or status categories changed this cycle.
 
 | Status | Count |
 |---|---:|
@@ -46,62 +42,60 @@ Authoritative snapshot for this task: docs/reports/0002/requirements.json, prese
 | BLOCKED | 0 |
 | TOTAL | 839 |
 
-Tested coverage: 0 / 839 × 100 = 0.00%. These are full registered contracts/clauses, not the pass rate of 46 tests. The register retains 43 section prose contracts and 796 clauses, each identifier once. The Git task advances parts of broad MB-25/31/32/33/36/37 requirements without completing those entire contracts.
+Tested requirement percentage = 0 / 839 × 100 = **0.00%**. This counts full source contracts/clauses, not test cases. All 43 section prose contracts and 796 listed clauses remain, each ID counted once. No broad requirement promoted merely because its focused tests passed.
 
-Task-stage progress: all 14 numbered Git connection/verification instructions completed, and instruction 15 reports updated/delivered. The final verification snapshot records this outcome; no product-completion estimate is inferred. Product D3 remains 19 PARTIAL / 23 NOT STARTED / 0 TESTED out of 42 entries. Production blocking conditions remain in Known Issues even though local synthetic work remains possible.
+Current task verification scope: **13/13 HTTP tests passed**. Complete regression scope: 59/59. Product D3 unchanged: 42 entries = 19 PARTIAL + 23 NOT STARTED; 0 fully TESTED. Production blockers remain even though local implementation can continue.
 
 ## D. Defects and blockers
-| ID | Severity | Description / impact | Recommended fix | Blocking status |
+| ID | Severity | Description / affected feature / impact | Recommended fix | Blocking status |
 |---|---|---|---|---|
-| RT-001 | Resolved for initial baseline | Missing Git repository/commit addressed by main and initial GitHub push. | Preserve history; normal commits and reviewed pushes. | No longer blocks source versioning |
-| RT-002 | High | Standard PostgreSQL and hosted CI outcomes unverified. | Run dedicated database checks and inspect hosted workflow. | Deployment assurance blocked |
-| RT-003 | High | No production file scan/encrypted object storage; PDF quarantine and missing handover photos remain. | Complete private file/scan pipeline. | Real-file workflow blocked |
-| RT-004 | High | Production auth/email/MFA and trusted IP rate-limit configuration unresolved. | Production authentication and boundary tests. | Production access blocked |
-| RT-005 | High | Real-data legal/privacy and demand validation unresolved. | Owner/adviser validation. | Real-data pilot blocked |
-| RT-006 | Medium | Handover label matching and missing photo/signature/deposit workflows. | Stable inventory identities and scoped next modules. | Full D3 incomplete |
-| RT-007 | Medium | New HTTP permission regressions, accessibility/security/load/restore checks absent. | Next recommended endpoint verification task. | Full release acceptance blocked |
-| RT-008 | Low | Existing preview tabs may retain restart connection errors. | Graceful restart/reconnect improvements. | Local workaround available |
-| RT-009 | Low | Historical links reference sibling research outside Git repository. | Preserve workspace; separately approve a publication-ready research bundle if wanted. | Does not block app build |
+| RT-010 | Medium, resolved | Unsupported charset exposed default HTML API error response. | Shared API parser handler now returns JSON 415; regression passes. | Resolved for demonstrated case |
+| RT-007 | Medium, partially resolved | Evidence/handover HTTP coverage now exists; broader release/security/accessibility/load/restore checks absent. | Continue staged verification. | Full release acceptance blocked |
+| RT-002 | High | Standard PostgreSQL and hosted CI outcomes unverified. | Next recommended database verification. | Deployment assurance blocked |
+| RT-003 | High | Production scanning/encrypted storage and handover photos absent; PDFs quarantined. | Complete private file pipeline. | Real-file workflows blocked |
+| RT-004 | High | Production email/MFA/recovery and trusted-client-IP configuration unresolved. Tests use fictional forwarded client addresses only. | Configure and test production auth/proxy trust. | Production access blocked |
+| RT-005 | High | Real-data privacy/legal and demand validation unresolved. | Owner/adviser validation. | Real-data pilot blocked |
+| RT-006 | Medium | Label-based handover matching; photos/signatures/settlement incomplete. | Stable item identities and scoped workflows. | Full D3 incomplete |
+| RT-008 | Low | Preview reconnection after restart can be stale; process not restarted in this cycle. | Improve graceful restart/reconnection. | Non-blocking locally |
+| RT-009 | Low | Historical sibling-research links require original workspace. | Separately approve publishable research bundle if needed. | No build block |
 
-Original K-01–K-12 risks and earlier reports remain preserved. No newly discovered runtime defect in this Git-only cycle.
+RT-001 (missing Git baseline) remains resolved. Prior K-01–K-12 and earlier reports preserved. No unauthorized-access defect was observed in the defined cases; this is not a full security assessment.
 
 ## E. Research alignment
-TR-01 isolated workspace and tenancy architecture, TR-02 evidence-based progress, and TR-05 permission/privacy controls guide this task. Code, tests and evidence are preserved rather than rebuilding the application. No product-design departure and no AI implementation. User confirmed preserving the existing UI; sample-login/label changes are outside Prompt 002. GitHub push is expressly authorized. No approval needed for the completed initial push; next major development task awaits owner instruction.
+TR-01 supports isolated architecture and real relational boundaries; TR-05 supports relationship-scoped permissions; TR-02 supports truthful evidence and preserved failure history. Implemented/testing slices map to MB-25/27/31/32/33/36. No product-flow change. Extraction was necessary to exercise the exact production-used API middleware without booting Next or touching the user's database. Synthetic tests and fixes are within the approved continuation. No further approval needed for this completed scope; next major task requires owner approval.
 
 ## F. Architecture and database changes
-- New/modified application modules: None.
-- Database changes/migrations: None.
-- Dependencies: None.
-- API changes: None.
-- Security changes: Git exclusions and bounded content checks; repository-local secure credential helper used; no token in origin URL.
-- AI changes: None.
-- Source control: new local .git, main branch, origin URL, initial commit, upstream tracking; documentation follow-up pushed successfully; final verification snapshot adds no application changes.
-- Files committed: source under app/server, five SQL migrations/db config, tests, scripts, package lock/config, CI workflow, safe .env.example, README, five reports and existing synthetic evidence/history. Exact manifest is docs/reports/0002/committed-files.txt (initial baseline); final tracked set can be obtained with git ls-files.
-- Excluded: .local including auth secret/database/mail, environment secrets, credentials/keys, private upload/document formats, node_modules, .next, generated build/type caches and OS/editor files. External research and unrelated projects are outside the repository.
+- New module: server/api.ts, exporting mountApi; now called by existing Nest bootstrap and the test harness.
+- Modified module: server/main.ts delegates API mounting; same seed/startup behavior.
+- New tests: tests/http.test.ts.
+- Database migrations: None. New dependencies: None. API routes: None added/removed.
+- API behavior fix: unsupported request charset/encoding returns JSON 415 rather than HTML; generic middleware fallback returns JSON 500 without stack details.
+- Security changes: bounded parser-error output plus endpoint regression coverage. Session/origin/relationship policy preserved.
+- AI integration: None. No external identity, bank, signing or government integration.
 
 ## G. Remaining work
-GitHub connection task complete through verified application/report delivery. Remaining product work: unchanged product backlog and issues RT-002–009; production integrations, acceptance gates and external services remain absent. UI/login changes were explicitly deferred. No new development feature authorized by this Git connection prompt.
+Standard PostgreSQL integration and hosted CI verification; wider API/rate/proxy/error-branch coverage; browser preview reload verification of updated bootstrap; full security/accessibility/restore/load acceptance. Product backlog remains handover media/exit/deposit, maintenance, payments, passport/map/sharing/references and production providers. Live data/privacy/provider approvals remain outstanding. No new external dependency or spending introduced.
 
 ## H. Recommended next task
-**HTTP-level security regression coverage for evidence and handover APIs.**
-- Objective: test real request authentication, origins, relationship permissions, downloads, responses, exports and malformed/oversized bodies using isolated synthetic test data.
-- Requirements: MB-27/31/32.
-- Priority: service tests pass, but endpoint middleware/security boundaries have not been exercised by an automated negative-route suite.
-- Dependencies: existing Git baseline and local test runtime; owner approval for next task. No real data or production provider needed.
-- Expected result: repeatable route tests and fixes only for demonstrated defects, with preserved UI/database behavior.
-- Tests: unauthenticated and unrelated users; incorrect origins; valid participants; cross-version IDs; PDF quarantine; malformed/oversized payloads; download headers; existing 46 regressions/build/typecheck.
-- Not started. Stop after Prompt 002 and wait for approval.
+**Verify the existing database adapter against an isolated standard PostgreSQL server.**
+- Objective: run migrations, auth and tenancy/evidence/handover/API tests against disposable server PostgreSQL and correct demonstrated adapter/transaction differences.
+- Requirements: MB-25/26/31/32.
+- Priority: local PGlite and HTTP tests pass, but the later deployment target remains unvalidated.
+- Dependencies: owner approval for the next task and an isolated PostgreSQL test service; do not use the existing .local database or any INTAN/MyilmiAI database. Service installation/credentials may need setup approval if unavailable.
+- Expected result: repeatable documented server-database checks and accurate deployment-readiness evidence, without claiming full release completion.
+- Required tests: fresh/repeated migrations, reopen persistence, transaction rollback/concurrency, auth sessions, tenancy isolation, document quarantine, handover responses/export and current 59 regressions/build/typecheck.
+- Not started. Stop for the next development prompt.
 
 ## I. Continuation checkpoint
-- App: /Users/lesh/Desktop/Intan/rental-trust-app.
-- Git: main tracks origin/main; HTTPS remote above; initial implementation commit 82cfaacb7ace56ac9380138adc5c7c35759e2152. Application/report delivery verified on GitHub at 16fc5eb77fe448b195d19379414f6e3b1fcfbd91; resolve final verification snapshot commit with HEAD, also checked in the final response.
-- Last verified functionality: existing 46 test cases pass, including handover/evidence persistence/permissions. Browser verification is inherited from cycle 0001, not repeated.
-- Stage: Prompt 002 source-control delivery; product D3 partial.
-- Last completed task: application and report delivery to GitHub with remote hash verification. No full product requirement promoted to TESTED.
-- Outstanding: RT-002–009 and full product backlog. Next exact task is H, pending approval.
-- Continue from five root reports, docs/reports/0002, README, existing tests and server modules. Preserve .local and historical reports. Do not touch INTAN/MyilmiAI projects.
-- Preview address: http://localhost:5199/ when the existing local server is running; runtime was not restarted in this task.
-- Reporting protocol: archive previous results, maintain five reports and exact counts, provide A–I and stop for next prompt.
+- App root: /Users/lesh/Desktop/Intan/rental-trust-app. Branch main; origin https://github.com/StarmanLS/build-rental-trust.git.
+- Implementation commit: ba0b8f3e6d6cff287ee076fbad19ed4d6e815142. Final report delivery commit is HEAD and supplied in final response after push.
+- State: original app unchanged in UI/domain/schema, shared API mount active on next startup, parser error fix implemented. Existing running preview was not restarted; HTTP test server was temporary and closed.
+- Last verified functionality: 59 automated cases including 13 actual HTTP boundary tests; build/typecheck pass. No full product requirement promoted.
+- Stage: security verification increment complete; product D3 PARTIAL. Outstanding RT-002–009; RT-010 reproduced/fixed.
+- Exact next task: standard PostgreSQL verification above, awaiting approval.
+- Files: five root report files; server/api.ts, server/main.ts, tests/http.test.ts; server/db.ts; scripts/postgres-smoke.ts; db/compose.yaml; docs/reports/0003 logs/requirements/refactor evidence.
+- Preview address: http://localhost:5199/ when running. Preserve .local data/secret; no app reset. Restart owned preview to load changed bootstrap when appropriate.
+- Continue reporting A–I, preserve earlier evidence and exact requirement counts, and stop after each approved cycle. No unrelated project access.
 
-## Summary
-Existing app preserved and initial baseline successfully pushed to GitHub. 46 tests/build/typecheck pass; local private state excluded; no feature or UI changes. Application/report delivery was verified at 16fc5eb77fe448b195d19379414f6e3b1fcfbd91; the final verification snapshot is documentation-only and its pushed hash is given in the conversation.
+## Short summary
+Added 13 real-HTTP boundary tests and fixed a demonstrated parser-error response defect. Final 59 tests/build/typecheck pass. Earlier failures preserved. UI and database unchanged; production and full system remain incomplete. Next database-verification task awaits approval.

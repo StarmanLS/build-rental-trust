@@ -1,0 +1,29 @@
+{
+  "prompt": "003",
+  "required_report_files_present": true,
+  "report_sections_A_to_I": true,
+  "requirements": 839,
+  "status_counts": {
+    "PARTIAL": 49,
+    "NOT STARTED": 773,
+    "IMPLEMENTED \u2014 NOT TESTED": 17
+  },
+  "ids_added": 0,
+  "ids_removed": 0,
+  "tests": {
+    "executed": 59,
+    "passed": 59,
+    "failed": 0,
+    "skipped": 0
+  },
+  "prior_failures_preserved": [
+    "http-first.log",
+    "http-before-fix.log",
+    "http-defect.log"
+  ],
+  "typecheck": "PASS",
+  "build": "PASS",
+  "browser": "not rerun",
+  "standard_postgresql": "not executed",
+  "live_database_used": false
+}

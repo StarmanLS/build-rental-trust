@@ -1,0 +1,245 @@
+2026-11-11T05:43:50.890Z WARN [Better Auth]: Rate limiting could not determine a client IP and is falling back to a single shared per-path bucket. Ensure your runtime forwards a trusted client IP header, then set `advanced.ipAddress.ipAddressHeaders` or `advanced.ipAddress.trustedProxies` so the address can be resolved.
+✖ HTTP unauthenticated evidence/handover routes require a session (1574.301167ms)
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (0.339125ms)
+✖ HTTP unverified session is refused at protected route (0.064ms)
+✖ HTTP unrelated users cannot list, create, download, respond or export (0.026208ms)
+✖ HTTP draft tenancy cannot receive evidence or handover records (0.0295ms)
+✖ HTTP valid upload/list/download preserves bytes and safe headers (0.030458ms)
+✖ HTTP own-upload response denied; tenant receipt replay has one effect (0.02825ms)
+✖ HTTP PDF quarantine blocks download and acknowledgement (0.024209ms)
+✖ HTTP handover response binds exact item/version and exports the dispute (0.04425ms)
+✖ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (0.043833ms)
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (0.024667ms)
+✖ HTTP unknown route and unsupported method cannot mutate (0.018167ms)
+✖ HTTP logout invalidates the same session cookie (0.015583ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 0
+ℹ fail 13
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2631.022042
+
+✖ failing tests:
+
+test at tests/http.test.ts:1:4115
+✖ HTTP unauthenticated evidence/handover routes require a session (1574.301167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:4806
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (0.339125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:5288
+✖ HTTP unverified session is refused at protected route (0.064ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:5461
+✖ HTTP unrelated users cannot list, create, download, respond or export (0.026208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:6117
+✖ HTTP draft tenancy cannot receive evidence or handover records (0.0295ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:6377
+✖ HTTP valid upload/list/download preserves bytes and safe headers (0.030458ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:7271
+✖ HTTP own-upload response denied; tenant receipt replay has one effect (0.02825ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:7829
+✖ HTTP PDF quarantine blocks download and acknowledgement (0.024209ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:8290
+✖ HTTP handover response binds exact item/version and exports the dispute (0.04425ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:9229
+✖ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (0.043833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:9989
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (0.024667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:10420
+✖ HTTP unknown route and unsupported method cannot mutate (0.018167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:10656
+✖ HTTP logout invalidates the same session cookie (0.015583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 200
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:30:130)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

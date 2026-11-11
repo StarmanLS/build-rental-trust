@@ -1,0 +1,73 @@
+✔ HTTP unauthenticated evidence/handover routes require a session (1447.04625ms)
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (18.049583ms)
+✔ HTTP unverified session is refused at protected route (3.01375ms)
+✔ HTTP unrelated users cannot list, create, download, respond or export (65.961ms)
+✔ HTTP draft tenancy cannot receive evidence or handover records (5.889916ms)
+✔ HTTP valid upload/list/download preserves bytes and safe headers (10.177541ms)
+✔ HTTP own-upload response denied; tenant receipt replay has one effect (19.118083ms)
+✔ HTTP PDF quarantine blocks download and acknowledgement (9.828583ms)
+✔ HTTP handover response binds exact item/version and exports the dispute (23.767416ms)
+✔ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (25.481875ms)
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (2.821292ms)
+UnsupportedMediaTypeError: unsupported charset "MADEUP"
+    at read (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/body-parser/lib/read.js:79:12)
+    at jsonParser (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/body-parser/lib/types/json.js:60:5)
+    at Layer.handleRequest (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/lib/layer.js:152:17)
+    at trimPrefix (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/index.js:342:13)
+    at /Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/index.js:297:9
+    at processParams (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/index.js:582:12)
+    at next (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/index.js:291:5)
+    at <anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/server/api.ts:14:382)
+    at Layer.handleRequest (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/lib/layer.js:152:17)
+    at trimPrefix (/Users/lesh/Desktop/Intan/rental-trust-app/node_modules/router/index.js:342:13) {
+  charset: 'madeup',
+  type: 'charset.unsupported'
+}
+✔ HTTP unknown route and unsupported method cannot mutate (5.276875ms)
+✔ HTTP logout invalidates the same session cookie (6.964958ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 11
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2384.987917
+
+✖ failing tests:
+
+test at tests/http.test.ts:1:4896
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (18.049583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 403
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:48:277)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 403,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/http.test.ts:1:10079
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (2.821292ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /application\/json/. Input:
+  
+  'text/html; charset=utf-8'
+  
+      at TestContext.<anonymous> (/Users/lesh/Desktop/Intan/rental-trust-app/tests/http.test.ts:57:269)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'text/html; charset=utf-8',
+    expected: /application\/json/,
+    operator: 'match',
+    diff: 'simple'
+  }

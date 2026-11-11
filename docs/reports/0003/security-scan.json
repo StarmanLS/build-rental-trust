@@ -1,0 +1,8 @@
+{
+  "new_report_files_scanned": 24,
+  "report_secret_pattern_findings": 0,
+  "implementation_files_scanned": 3,
+  "implementation_secret_pattern_findings": [],
+  "tracked_private_path_findings": [],
+  "scope": "Pattern and tracked-path checks; not a guarantee against all possible secrets. Local database and auth secret excluded."
+}

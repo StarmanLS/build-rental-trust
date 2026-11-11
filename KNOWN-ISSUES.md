@@ -1,19 +1,19 @@
-# Known issues — Prompt 002
+# Known issues — Prompt 003
 
 ## D. Defects and blockers
-| ID | Severity | Description / impact | Recommended fix | Blocking status |
+| ID | Severity | Description / affected feature / impact | Recommended fix | Blocking status |
 |---|---|---|---|---|
-| RT-001 | Resolved for initial baseline | Missing Git repository/commit addressed by main and initial GitHub push. | Preserve history; normal commits and reviewed pushes. | No longer blocks source versioning |
-| RT-002 | High | Standard PostgreSQL and hosted CI outcomes unverified. | Run dedicated database checks and inspect hosted workflow. | Deployment assurance blocked |
-| RT-003 | High | No production file scan/encrypted object storage; PDF quarantine and missing handover photos remain. | Complete private file/scan pipeline. | Real-file workflow blocked |
-| RT-004 | High | Production auth/email/MFA and trusted IP rate-limit configuration unresolved. | Production authentication and boundary tests. | Production access blocked |
-| RT-005 | High | Real-data legal/privacy and demand validation unresolved. | Owner/adviser validation. | Real-data pilot blocked |
-| RT-006 | Medium | Handover label matching and missing photo/signature/deposit workflows. | Stable inventory identities and scoped next modules. | Full D3 incomplete |
-| RT-007 | Medium | New HTTP permission regressions, accessibility/security/load/restore checks absent. | Next recommended endpoint verification task. | Full release acceptance blocked |
-| RT-008 | Low | Existing preview tabs may retain restart connection errors. | Graceful restart/reconnect improvements. | Local workaround available |
-| RT-009 | Low | Historical links reference sibling research outside Git repository. | Preserve workspace; separately approve a publication-ready research bundle if wanted. | Does not block app build |
+| RT-010 | Medium, resolved | Unsupported charset exposed default HTML API error response. | Shared API parser handler now returns JSON 415; regression passes. | Resolved for demonstrated case |
+| RT-007 | Medium, partially resolved | Evidence/handover HTTP coverage now exists; broader release/security/accessibility/load/restore checks absent. | Continue staged verification. | Full release acceptance blocked |
+| RT-002 | High | Standard PostgreSQL and hosted CI outcomes unverified. | Next recommended database verification. | Deployment assurance blocked |
+| RT-003 | High | Production scanning/encrypted storage and handover photos absent; PDFs quarantined. | Complete private file pipeline. | Real-file workflows blocked |
+| RT-004 | High | Production email/MFA/recovery and trusted-client-IP configuration unresolved. Tests use fictional forwarded client addresses only. | Configure and test production auth/proxy trust. | Production access blocked |
+| RT-005 | High | Real-data privacy/legal and demand validation unresolved. | Owner/adviser validation. | Real-data pilot blocked |
+| RT-006 | Medium | Label-based handover matching; photos/signatures/settlement incomplete. | Stable item identities and scoped workflows. | Full D3 incomplete |
+| RT-008 | Low | Preview reconnection after restart can be stale; process not restarted in this cycle. | Improve graceful restart/reconnection. | Non-blocking locally |
+| RT-009 | Low | Historical sibling-research links require original workspace. | Separately approve publishable research bundle if needed. | No build block |
 
-Original K-01–K-12 risks and earlier reports remain preserved. No newly discovered runtime defect in this Git-only cycle.
+RT-001 (missing Git baseline) remains resolved. Prior K-01–K-12 and earlier reports preserved. No unauthorized-access defect was observed in the defined cases; this is not a full security assessment.
 
 
-Prior issue details retained at docs/reports/0002/previous-KNOWN-ISSUES.md and docs/reports/0001.
+Historical issue records retained under docs/reports/0003/previous-KNOWN-ISSUES.md and earlier cycles.

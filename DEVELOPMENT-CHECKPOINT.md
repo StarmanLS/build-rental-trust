@@ -1,13 +1,13 @@
-# Checkpoint — Prompt 002
+# Checkpoint — Prompt 003
 
 ## I. Continuation checkpoint
-- App: /Users/lesh/Desktop/Intan/rental-trust-app.
-- Git: main tracks origin/main; HTTPS remote above; initial implementation commit 82cfaacb7ace56ac9380138adc5c7c35759e2152. Application/report delivery verified on GitHub at 16fc5eb77fe448b195d19379414f6e3b1fcfbd91; resolve final verification snapshot commit with HEAD, also checked in the final response.
-- Last verified functionality: existing 46 test cases pass, including handover/evidence persistence/permissions. Browser verification is inherited from cycle 0001, not repeated.
-- Stage: Prompt 002 source-control delivery; product D3 partial.
-- Last completed task: application and report delivery to GitHub with remote hash verification. No full product requirement promoted to TESTED.
-- Outstanding: RT-002–009 and full product backlog. Next exact task is H, pending approval.
-- Continue from five root reports, docs/reports/0002, README, existing tests and server modules. Preserve .local and historical reports. Do not touch INTAN/MyilmiAI projects.
-- Preview address: http://localhost:5199/ when the existing local server is running; runtime was not restarted in this task.
-- Reporting protocol: archive previous results, maintain five reports and exact counts, provide A–I and stop for next prompt.
+- App root: /Users/lesh/Desktop/Intan/rental-trust-app. Branch main; origin https://github.com/StarmanLS/build-rental-trust.git.
+- Implementation commit: ba0b8f3e6d6cff287ee076fbad19ed4d6e815142. Final report delivery commit is HEAD and supplied in final response after push.
+- State: original app unchanged in UI/domain/schema, shared API mount active on next startup, parser error fix implemented. Existing running preview was not restarted; HTTP test server was temporary and closed.
+- Last verified functionality: 59 automated cases including 13 actual HTTP boundary tests; build/typecheck pass. No full product requirement promoted.
+- Stage: security verification increment complete; product D3 PARTIAL. Outstanding RT-002–009; RT-010 reproduced/fixed.
+- Exact next task: standard PostgreSQL verification above, awaiting approval.
+- Files: five root report files; server/api.ts, server/main.ts, tests/http.test.ts; server/db.ts; scripts/postgres-smoke.ts; db/compose.yaml; docs/reports/0003 logs/requirements/refactor evidence.
+- Preview address: http://localhost:5199/ when running. Preserve .local data/secret; no app reset. Restart owned preview to load changed bootstrap when appropriate.
+- Continue reporting A–I, preserve earlier evidence and exact requirement counts, and stop after each approved cycle. No unrelated project access.
 

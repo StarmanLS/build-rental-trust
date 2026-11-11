@@ -1,0 +1,74 @@
+
+> rental-trust-local@0.1.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ signup persists a hashed account and delivers only to test mailbox (2936.1295ms)
+✔ real email signup is denied by server (4.792875ms)
+2026-11-11T05:45:28.971Z WARN [Better Auth]: Rate limiting could not determine a client IP and is falling back to a single shared per-path bucket. Ensure your runtime forwards a trusted client IP header, then set `advanced.ipAddress.ipAddressHeaders` or `advanced.ipAddress.trustedProxies` so the address can be resolved.
+✔ unverified email cannot log in (74.595708ms)
+✔ verification link allows login and persisted session (98.977708ms)
+2026-11-11T05:45:29.135Z WARN [Better Auth]: Invalid password
+✔ invalid password denied (73.543542ms)
+✔ signout revokes the existing session (9.2335ms)
+2026-11-11T05:45:29.322Z WARN [Better Auth]: Invalid password
+✔ password recovery works once and does not retain old credentials (386.102708ms)
+✔ property persists with unverified claim and no inferred ownership (3706.093625ms)
+✔ unrelated user cannot see records or audit events (5.441792ms)
+✔ unrelated user cannot create tenancy on claimed property (5.162458ms)
+✔ invalid dates and extra privilege fields rejected (6.548542ms)
+✔ invitation stores a digest, not the raw secret (12.981166ms)
+✔ wrong recipient and wrong secret denied (129.561583ms)
+✔ acceptance is atomic and repeated acceptance has one effect (44.965375ms)
+✔ decline creates no participant and allows new invitation (33.321833ms)
+✔ revocation blocks future acceptance (10.339708ms)
+✔ expired invitation fails (4.950375ms)
+✔ stale version cannot be accepted (6.790625ms)
+✔ unverified email cannot accept (8.628584ms)
+✔ duplicate pending invite and self-invitation denied (7.54125ms)
+✔ rollback preserves no partial property or audit on failed claim (4.674917ms)
+✔ reopen persistent database preserves state and migration is non-destructive (97.926125ms)
+✔ one account retains both roles and independent setup completion (23.727875ms)
+✔ role switching grants no access to unrelated records (5.788542ms)
+✔ admin role and unsupported setup fields denied (0.5175ms)
+✔ agent viewing visible only to recording agent and named tenant (31.903333ms)
+✔ only the tenant confirms and can later dispute a viewing (19.753541ms)
+✔ viewing rejects duplicates, future dates, self and unclaimed property (11.217ms)
+✔ evidence requires a mutually confirmed tenancy and resource relationship (3691.663417ms)
+✔ immutable versions preserve bytes, fingerprints and participant access (23.666416ms)
+✔ cross-tenancy download and response are denied including forged document IDs (17.854334ms)
+✔ concurrent uploads get separate versions and duplicate bytes are rejected (50.378083ms)
+✔ PDF stays quarantined and cannot be downloaded or acknowledged (112.191875ms)
+✔ invalid types, binary text, malformed base64, oversized and unsynthetic input rejected (42.826375ms)
+✔ stamping evidence must pair to an agreement in the same tenancy (24.382125ms)
+✔ receipt and dispute are version-bound, append-only and idempotent (29.5175ms)
+✔ evidence and responses survive database reopen (130.685584ms)
+✔ handover requires confirmed tenancy and relationship access (3624.030792ms)
+✔ unrelated user cannot create, read or export records (20.665042ms)
+✔ concurrent versions preserve observations and generate distinct item IDs (18.835875ms)
+✔ invalid readings, keys, duplicate labels, future dates and spoofed IDs are rejected (10.168875ms)
+✔ move-out requires same-tenancy move-in baseline and chronological observations (28.699667ms)
+✔ responses require the other party and an item belonging to that version (19.712333ms)
+✔ disputes require a note; responses are replay-safe and history retained (171.574958ms)
+✔ export retains all versions, pending items and disagreements without financial decisions (15.485708ms)
+✔ handover versions and responses persist after reopening (153.0505ms)
+✔ HTTP unauthenticated evidence/handover routes require a session (3562.985708ms)
+✔ HTTP missing/foreign origin and foreign host cannot mutate records (8.014459ms)
+✔ HTTP unverified session is refused at protected route (4.1435ms)
+✔ HTTP unrelated users cannot list, create, download, respond or export (70.448792ms)
+✔ HTTP draft tenancy cannot receive evidence or handover records (11.472875ms)
+✔ HTTP valid upload/list/download preserves bytes and safe headers (14.648834ms)
+✔ HTTP own-upload response denied; tenant receipt replay has one effect (21.968208ms)
+✔ HTTP PDF quarantine blocks download and acknowledgement (10.402708ms)
+✔ HTTP handover response binds exact item/version and exports the dispute (30.4245ms)
+✔ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (26.501417ms)
+✔ HTTP wrong content type or encoding must not expose an HTML stack trace (1.057416ms)
+✔ HTTP unknown route and unsupported method cannot mutate (4.458708ms)
+✔ HTTP logout invalidates the same session cookie (7.64325ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5120.071833

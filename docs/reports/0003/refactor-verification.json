@@ -1,0 +1,26 @@
+{
+  "shared_middleware_matches_previous_bootstrap_except_error_handler": true,
+  "unchanged_files": [
+    "app/evidence-panel.tsx",
+    "app/globals.css",
+    "app/handover-panel.tsx",
+    "app/layout.tsx",
+    "app/page.tsx",
+    "db/compose.yaml",
+    "db/migrations/001-foundation.sql",
+    "db/migrations/002-role-onboarding.sql",
+    "db/migrations/003-agent-viewings.sql",
+    "db/migrations/004-tenancy-evidence.sql",
+    "db/migrations/005-handovers.sql",
+    "server/auth.ts",
+    "server/domain.ts",
+    "server/evidence.ts",
+    "server/handover.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "new_error_behavior": "unsupported charset/encoding -> bounded JSON 415; unexpected middleware errors -> generic JSON 500",
+  "live_database_used_by_tests": false,
+  "test_listener": "ephemeral port on 127.0.0.1; server closed after tests",
+  "test_database": "in-memory PGlite; closed after tests"
+}

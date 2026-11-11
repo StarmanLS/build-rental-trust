@@ -1,0 +1,192 @@
+✖ HTTP unauthenticated evidence/handover routes require a session (1035.277ms)
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (0.611458ms)
+✖ HTTP unverified session is refused at protected route (0.164834ms)
+✖ HTTP unrelated users cannot list, create, download, respond or export (0.031458ms)
+✖ HTTP draft tenancy cannot receive evidence or handover records (0.028458ms)
+✖ HTTP valid upload/list/download preserves bytes and safe headers (0.033958ms)
+✖ HTTP own-upload response denied; tenant receipt replay has one effect (0.026333ms)
+✖ HTTP PDF quarantine blocks download and acknowledgement (0.024167ms)
+✖ HTTP handover response binds exact item/version and exports the dispute (0.044334ms)
+✖ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (0.044917ms)
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (0.022417ms)
+✖ HTTP unknown route and unsupported method cannot mutate (0.017667ms)
+✖ HTTP logout invalidates the same session cookie (0.014833ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 0
+ℹ fail 13
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2459.2115
+
+✖ failing tests:
+
+test at tests/http.test.ts:1:4115
+✖ HTTP unauthenticated evidence/handover routes require a session (1035.277ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:4806
+✖ HTTP missing/foreign origin and foreign host cannot mutate records (0.611458ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:5288
+✖ HTTP unverified session is refused at protected route (0.164834ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:5461
+✖ HTTP unrelated users cannot list, create, download, respond or export (0.031458ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:6117
+✖ HTTP draft tenancy cannot receive evidence or handover records (0.028458ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:6377
+✖ HTTP valid upload/list/download preserves bytes and safe headers (0.033958ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:7271
+✖ HTTP own-upload response denied; tenant receipt replay has one effect (0.026333ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:7829
+✖ HTTP PDF quarantine blocks download and acknowledgement (0.024167ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:8290
+✖ HTTP handover response binds exact item/version and exports the dispute (0.044334ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:9229
+✖ HTTP malformed JSON, oversized body and invalid evidence return bounded errors (0.044917ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:9989
+✖ HTTP wrong content type or encoding must not expose an HTML stack trace (0.022417ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:10420
+✖ HTTP unknown route and unsupported method cannot mutate (0.017667ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tests/http.test.ts:1:10656
+✖ HTTP logout invalidates the same session cookie (0.014833ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2368:21)
+      at listenInCluster (node:net:2499:12)
+      at node:net:2728:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
