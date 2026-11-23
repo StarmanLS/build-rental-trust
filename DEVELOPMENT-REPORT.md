@@ -2,76 +2,61 @@
 
 **Report information**
 
-- Prompt number: 005, M1.1, including AI-native addendum and preview correction.
-- Date/time: 24 November 2026, 00:32 MYT.
-- Stage: Module 1, core frontend and user experience. Product remains partial.
-- Branch: `main`; approved origin: `https://github.com/StarmanLS/build-rental-trust.git`.
-- Latest source before this cycle: `03d6eed3406783cdb4be24709632428c94b21061`. This report's commit is recorded by the final Git output, since it cannot contain its own hash.
-- Overall status: M1.1 dashboard and preview slice verified; full rental platform and later modules incomplete.
+- Prompt number: 006 (M1.2). Date/time: 24 November 2026, 07:30 MYT.
+- Stage: Module 1, property listing and location foundation. M1.2 remains PARTIAL because Google Maps access is unavailable.
+- Branch: `main`; origin: `https://github.com/StarmanLS/build-rental-trust.git`. Pre-cycle commit: `2cf81abee99fb2b5daea5b9b63e7c54c4137d7aa`. Final checkpoint commit is recorded by Git and the delivery message.
+- Overall status: private listing drafts work; map publication and marketplace use remain blocked.
 
 ## A. Work completed
 
-| Requirement | Actual result | Files | Status |
+| Requirement | Actual implementation | Files | Status |
 |---|---|---|---|
-| MB-07/28/31/32, RT-008 | Restored the last available GitHub source into the incomplete local app folder; fixed dev shutdown so upgraded browser sockets no longer leave the Next lock. Port 5199 restarted cleanly. | `server/main.ts`, `README.md` | Browser verified |
-| MB-07/28 | Removed preview/banner/build progress/test mailbox controls, fictional labels, sample generators and technical copy from rendered pages. Login alone has two one-click sample accounts. Genuine unverified/quarantine warnings remain. | `app/page.tsx`, `app/evidence-panel.tsx`, `app/handover-panel.tsx`, `app/layout.tsx`, `server/main.ts`, `server/domain.ts` | Browser verified for main pages |
-| MB-07/10/28 | Added landlord, tenant and agent dashboard cards using scoped properties, tenancies, invitations and viewings. Missing payment, maintenance, passport and scheduling records show empty states, never invented outcomes. Multiple roles retain one account. | `app/role-dashboard.tsx`, `app/page.tsx`, `app/globals.css` | Three roles browser verified |
-| MB-07/28 | Increased select arrow space and added responsive dashboard grids. | `app/globals.css` | Mobile/desktop checked |
-| MB-07/10 | Invitation creation returns a private recipient-bound link to its creator; landlord can copy it. No claim of email delivery. Existing token digest, expiry and recipient checks remain. | `server/domain.ts`, `app/page.tsx`, `tests/domain.test.ts` | Browser and focused test verified |
-| MB-07/10/28 | Invited sample tenant opened that link, confirmed the tenancy, and saw the relationship persist after refresh. Future-dated tenancies now read “Not yet started” rather than “None confirmed.” | `app/role-dashboard.tsx`, `app/page.tsx` | Browser verified |
-| MB-22/24/31 | Added a provider-neutral AI engine contract with source authorization, consent gate, provenance validation, human-review state and failure fallback; documented dashboard entry points and future capabilities. No model connected and no AI text shown as real output. | `server/ai/engine.ts`, `tests/ai-engine.test.ts`, `docs/AI-ARCHITECTURE.md` | Contract tested; live AI not started |
-| MB-33/34/36 | Preserved unpushed Prompt 004 report text as historical evidence and reconciled five current reports with the available source. Saved browser screenshots. | Five root reports, `docs/reports/0004-unpushed/`, `docs/reports/0005-m11/` | Updated |
+| MB-09-001–004 | Property registration now opens a structured listing form. Name, address, type, unit/building, rent, deposit, charges, rooms, area, furnishing, parking, capacity, availability, minimum term, facilities, amenities and description save and reload. | `app/page.tsx`, `app/listing-editor.tsx`, `app/globals.css`, `server/domain.ts`, `server/api.ts`, migration 006 | PARTIAL: private drafts; no map, photos or published listing |
+| MB-09-011 | Prior address is retained on edit; duplicate entered address produces a warning. Published location would be cleared and paused after an address change. | `server/domain.ts`, migration 006 | PARTIAL: no geocoding or evidence review |
+| MB-09/22/31 | Listing writes and location-history reads require the property claimant; unrelated access is refused. Invalid/partial coordinates are rejected by DB constraints; extra coordinate fields are rejected by API validation. Publish rejects a missing map pin/Place ID. Withdraw is terminal; pause and withdraw endpoints exist. | `server/domain.ts`, `server/api.ts`, `tests/listings.test.ts` | Tested narrow slice; full role/authority model incomplete |
+| MB-28 | Authenticated marketplace read endpoint returns only published listings with coordinates, Place ID and acceptable location state. No current listing qualifies; private drafts stay private. | `server/domain.ts`, `server/api.ts` | Tested empty-state/filter logic; tenant discovery UI not started |
+| M1.3/M1.4 and AI matching | Request, offer, consent, ranking and evidence contracts recorded; exact filters precede AI explanation. No AI model connected and no private data sent. | `docs/MARKETPLACE-ROADMAP.md` | Planned only |
 
 ## B. Tests and verification
 
-- Focused tests: 26/26 passed for domain and AI contracts; AI fallback, permission denial, consent requirement, invented citation, provider error and human-review state checked.
-- Final full regression: **64 executed, 64 passed, 0 failed, 0 skipped**. Includes the previous 59. One earlier sandboxed run failed HTTP socket binding (`EPERM`); rerun with local socket access passed. No failed attempt is counted as a pass.
-- Build: PASS in a separate synchronized checkout, avoiding the live Next dev output directory. Typecheck: PASS in the application directory.
-- Database: current local PGlite opened and preserved through controlled restart; only exact old fixture display names are normalized. The previous `.local` directory was absent when this cycle began, so earlier local records could not be recovered. No schema migration or reset was run. Standard PostgreSQL was not tested.
-- Browser: in-app browser tested landlord, tenant and agent dashboards; login/logout, one-click sample access, role switching, navigation, refresh, invitation creation, link display, recipient acceptance and persisted mutually confirmed tenancy. The accepted tenancy starts in 2027, so the current-rental tile correctly says “Not yet started.” Mobile 390 px had document width 390 px; desktop 1440 px inspected. Console error list was empty after final checks. Current server returned HTTP 200 and listened on `127.0.0.1:5199`; the owner confirmed the updated preview opens in their own browser.
-- Server logs: current requests returned 200; an earlier transient JSX compile failure during editing was corrected before final checks. An HMR 404 appeared during a prior restart; current browser error list was empty.
-- Permission evidence: existing HTTP tests cover unrelated users, foreign origin, session and document access; new AI tests reject unauthorized evidence. Complete accessibility, all-form browser, load and penetration audits were not executed.
-- Screenshots: `docs/reports/0005-m11/agent-desktop.jpg`, `landlord-desktop.jpg`, `tenant-mobile.jpg`, `login-mobile.jpg`, `tenant-confirmed-tenancy.jpg`. No invitation bearer link was captured.
+- Focused listing tests: 7/7 passed. Full regression: 71/71 passed, 0 failed, 0 skipped (64 baseline plus 7 listing tests).
+- First full run: 58 passed, 13 HTTP tests failed because the restricted process could not bind `127.0.0.1` (`EPERM`). Retried with approved local test-server access; all 71 passed. This was an environment permission failure, not hidden.
+- Typecheck: `npm run typecheck` passed. Production build: passed in the separate existing build checkout, leaving the live preview running. An initial temporary build using a symlinked `node_modules` failed Next package resolution; the real dependency checkout succeeded.
+- Database: additive migration 006 applied to the existing local DB without reset; listing save/reopen and invalid-coordinate constraints passed.
+- Browser: landlord opened and edited a listing, saved it, refreshed, and saw the persisted address, rent, deposit, rooms and other fields. Desktop 1440px and mobile 390px listing form/property page had no horizontal overflow. Browser console error/warning list was empty. Captures were observed in the browser session; no screenshot file was exported this cycle.
+- Security: unrelated listing edit/status/history denied in tests; draft marketplace result empty; malformed coordinate fields rejected. Broader agent credential and ownership review untested/unimplemented.
+- Not executed: live Google Maps, autocomplete, pin drag/confirmation, Street View, walking route, photo upload, published-listing UI, real-user and external-access checks. Google Maps credentials and billing approval are absent.
 
 ## C. Requirement status
 
-Canonical 839-ID register retained; no ID added, removed or double-counted this cycle. Whole requirement status remains **TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 49; NOT STARTED 773; BLOCKED 0; TOTAL 839**. Tested requirement percentage: **0/839 × 100 = 0.00%**. Narrowly tested slices do not complete broad clauses. M1.1 dashboard slice: 3/3 role homes browser checked; full feature acceptance remains partial because payments, maintenance, reviews, passport, scheduling and map/verification workflows lack services.
+Canonical 839 IDs, no IDs added/removed: TESTED **0**; IMPLEMENTED — NOT TESTED **17**; PARTIAL **54**; NOT STARTED **768**; BLOCKED **0**; TOTAL **839**. Broad tested percentage: **0.00%**. Five MB-09 clauses (001–004, 011) moved NOT STARTED → PARTIAL. Broad acceptance remains conservative despite narrow passing tests. M1.2 completion conditions: private listing creation/edit, persistence, safe status and draft visibility controls checked; map, Street View, published tenant view and photo/transport conditions incomplete. M1.2 is **not complete**.
 
 ## D. Defects and blockers
 
 | ID | Severity | Impact and fix | Blocking |
 |---|---|---|---|
-| RT-008 | High, resolved in current local run | Missing source/server and stuck shutdown caused refused connection. Git source restored; socket cleanup and restart verified. Process still must remain running. | No current preview block |
-| RT-014 | High | Prompt 004 implementation source and original local DB were absent; only unpushed report text survived. Recover from a separate verified backup if available; never claim those features are present. | Blocks recovering prior work |
-| RT-011 | High | No mandatory Google Maps pin, persisted coordinates or provider access. | M1.2 property location |
-| RT-012 | High | Identity/ownership/authority evidence review and privileged approvals absent. | Verification |
-| RT-013 | High | Payments, maintenance, reviews, passport, scheduled viewings and complete workflows absent; dashboard empty states only. | Full product |
-| RT-004/003/002/005/006/007 | Existing | Production auth/email, file scanning, standard PostgreSQL, legal review, handover completion and broad acceptance remain open. | Production/release |
+| RT-011 | High | No approved Maps key/billing/configuration. No autocomplete, picker, draggable pin or location confirmation. Add approved Maps integration and server-side place/coordinate checks. | M1.2 publication |
+| RT-016 | High | Photo upload/scan/storage and Street View/route services absent; listings are text-only drafts. Add secure media pipeline and Maps availability checks. | Full listing |
+| RT-017 | Medium | Duplicate detection compares normalized address only; cannot distinguish units or coordinate conflicts. Add place/geocode evidence and manual review. | Location integrity |
+| RT-012 | High | Claims are self-declared; ownership/agent authority not independently reviewed. Add evidence and authorized reviewer workflow. | Trusted marketplace |
+| RT-014 | High | Historical Prompt 004 source and earlier DB remain unrecovered. Preserve current local data and archived reports. | Historical recovery |
 
 ## E. Research alignment
 
-Used the existing privacy and fairness approach: role-scoped records, separate identity/ownership status, no inferred payment or trust outcome, recipient-bound invitation links, and human review of AI suggestions. A clean role dashboard replaces implementation-status screens. No approved research was changed. External provider activation requires separate approval; none was attempted.
+The existing property/claim foundation and owner's requirements guided structured listings, separate location and authority statuses, duplicate warnings, consent-first matching and hard mandatory filters. The map and walking/Street View design differs from the target because no approved Maps access exists; no nonfunctional map or invented travel distance is shown. Approval is needed only before activating Maps billing/credentials, real media storage or a live AI provider.
 
 ## F. Architecture and database changes
 
-- New modules: `app/role-dashboard.tsx`, `server/ai/engine.ts`; AI contract documentation and tests.
-- Modified modules: page, layout, styles, evidence, handover, invite return and server shutdown/fixture names.
-- Database migrations/new dependencies: None.
-- API change: existing invitation response now includes its private link for the authorized creator. Existing recipient/token checks remain.
-- Security: no private key in frontend; AI source permission and consent contract; no live provider, no external private data transfer.
-
-## AI-Native Architecture
-
-Implemented: provider-neutral, tested suggestion contract and deterministic agent follow-up counts. Planned: document/photo/payment extraction, agreement help, maintenance classification, history summaries, moderation and Trust Maps with source IDs, dates, sample sizes and limitations. Data source authorization is injected per record; sensitive categories require a consent grant before provider use. Provider/configuration: none approved or connected. API calls/cost this cycle: zero; future prices and limits unverified. Human confirmation remains mandatory for identity, ownership, payments without independent evidence, agreements, handovers, disputes and shared trust claims. Live provider integration, redaction, model audit storage and user correction persistence remain dependencies.
+New `app/listing-editor.tsx`, migration `006-property-listings.sql`, `tests/listings.test.ts`, `docs/MARKETPLACE-ROADMAP.md`. Modified `app/page.tsx`, `app/globals.css`, `server/domain.ts`, `server/api.ts`, `server/db.ts`, `tests/domain.test.ts`. Migration adds `property_listings` and `property_location_history`; existing data preserved. APIs: `POST /properties/:id/listing`, `POST /properties/:id/listing-status`, `GET /properties/:id/location-history`, `GET /listings` under `/api/v1`. No new dependency. No credential, live AI integration, external API call or paid service added. Source authorization and DB constraints added for listing data.
 
 ## G. Remaining work
 
-Complete M1.2 property registration with a mandatory map pin and owner/authority review; add actual payment, maintenance, review, passport and scheduling data services; connect secure email and file processing; configure an approved AI provider only after consent, cost and data-handling review. Broader mobile, accessibility and end-to-end mutation coverage remains untested. Historical Prompt 004 source is unavailable in the current repository.
+Google Maps access and mandatory pin flow; address/place consistency and evidence-based location review; actual publishing and tenant discovery; photo pipeline; route-based MRT distance and direct-connection evidence; Street View availability/date; ownership/agent authority review; M1.3 tenant requests and matching; M1.4 offers and viewing appointments. Existing payment, maintenance, review and passport gaps remain. The preview requires a local process, and the owner has not re-confirmed access after this cycle's restart.
 
 ## H. Recommended next task
 
-**M1.2: property location and verification.** Add mandatory map selection and persisted coordinates, then separate identity, ownership and rental-authority submissions with authorized review. Covers MB-08/09/22/28/31/32. Priority: a property cannot be trusted or reliably located without these checks. Depends on approved Maps access, secure evidence storage and reviewer roles. Expected result: saved property pin and honest pending-review states. Test create/edit/refresh, missing/forged location, unrelated access, evidence upload/review, mobile and keyboard use. Do not start until the next prompt.
+**Finish M1.2 map-backed location confirmation and listing publication.** Cover MB-09/28/31. Priority: private drafts cannot become eligible marketplace listings until a verified pin is saved. Dependency: owner-approved Google Maps access and billing; secure server-side configuration. Result: autocomplete, draggable pin, confirmation, persisted Place ID/coordinates, address discrepancy warnings, controlled publication, Street View availability and route evidence where the approved APIs provide it. Test wrong/missing pins, address edits, duplicate/conflicting positions, permissions, mobile keyboard/drag, refresh and tenant visibility. Do not start until the next development prompt.
 
 ## I. Continuation checkpoint
 
-Root: `/Users/lesh/Desktop/Intan/rental-trust-app`; branch `main`; origin above. Preview: [http://localhost:5199/](http://localhost:5199/), process started with `npm run dev` and left running. Last verified: 64/64 tests, isolated build, typecheck, three dashboards, login/roles/invitation creation and tenant acceptance, user browser access. Last completed slice: M1.1 dashboard/preview/AI-contract correction. Outstanding: RT-014, RT-011–013 and production issues. Continue with the five root reports, `docs/AI-ARCHITECTURE.md`, `app/role-dashboard.tsx`, `app/page.tsx`, `server/ai/engine.ts`, `server/domain.ts`, and screenshots. Preserve `.local`, all 839 IDs and historical reports. Exact next task: M1.2 above.
+Project root `/Users/lesh/Desktop/Intan/rental-trust-app`; `main`; approved origin above. Last verified: 71/71 regression, typecheck, isolated build, browser listing save/refresh, mobile/desktop layout, and preview listener on `127.0.0.1:5199`. URL: [http://localhost:5199/](http://localhost:5199/). Latest completed slice: private listing draft and location-integrity data foundation. Outstanding RT-011/012/014/016/017 and the older production issues in `KNOWN-ISSUES.md`. Next exact task: map-backed location confirmation/publication after approved access. Read the five root reports, migration 006, `app/listing-editor.tsx`, `server/domain.ts`, `docs/MARKETPLACE-ROADMAP.md`. Preserve `.local` and Git history.

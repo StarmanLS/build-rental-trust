@@ -4,7 +4,7 @@ Checkpoint 0001 · 10 November 2026. Local synthetic implementation PARTIAL; not
 
 Canonical machine register: `../rental-trust-research/development-plan/requirements.json`. The table below retains all 839 unique identifiers, including 43 section prose contracts and 796 listed clauses. A section contract is not a second completion credit for its children. This is mixed-granularity register coverage, not estimated independent-feature completion. No IDs were added or removed this cycle. Owner additions map to existing scope: multi-role/agents MB-07/28; viewing section MB-07/10; future rental history/map/payment sharing MB-12/17/22; reporting protocol MB-33/36/37. The future passport specification preserves the detailed addition.
 
-TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 49; NOT STARTED 773; BLOCKED 0; TOTAL 839. Tested coverage 0.00%. D3 checkpoint scope MB-15/19: 42 entries, 19 PARTIAL, 23 NOT STARTED, 0 TESTED. Production blockers exist even when a broad requirement still allows synthetic implementation.
+TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 54; NOT STARTED 768; BLOCKED 0; TOTAL 839. Tested coverage 0.00%. D3 checkpoint scope MB-15/19: 42 entries, 19 PARTIAL, 23 NOT STARTED, 0 TESTED. Production blockers exist even when a broad requirement still allows synthetic implementation.
 
 No existing module was declared fully TESTED. Narrow tests and browser evidence are in DEVELOPMENT-REPORT.md and docs/reports/0001. Historical before/after machine snapshots and prior research records remain preserved. 24 entries moved NOT STARTED → PARTIAL; the exact list is in docs/reports/0001/register-changes.json.
 
@@ -159,17 +159,17 @@ No existing module was declared fully TESTED. Narrow tests and browser evidence 
 | MB-08-010 | Expired | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-08-011 | Suspended | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09 | Full section contract, including all prose constraints; see source lines 359–400 | PARTIAL | PARTIAL | ../../rental-trust-app/docs/evidence/CHECKPOINT-2026-11-10.md; Synthetic foundation only; full section acceptance and production validation outstanding |
-| MB-09-001 | Property creation | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-002 | Address information | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-003 | Property type | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-004 | Unit details | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-001 | Property creation | PARTIAL | PARTIAL | Property creation is a private record; mandatory map and independent authority checks remain open. M1.2 browser and domain checks. |
+| MB-09-002 | Address information | PARTIAL | PARTIAL | Address saves and edits; address change history and duplicate warnings tested. No Maps consistency check. |
+| MB-09-003 | Property type | PARTIAL | PARTIAL | Property type saves in a listing draft; broader verification remains open. |
+| MB-09-004 | Unit details | PARTIAL | PARTIAL | Unit and building fields save; photos and location verification remain open. |
 | MB-09-005 | Ownership claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-006 | Agent authority claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-007 | Property management relationships | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-008 | Verification evidence | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-009 | Conflicting claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-010 | Verification status | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-011 | Property history | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-011 | Property history | PARTIAL | PARTIAL | Original address stored on edit; full property and location review history remains open. |
 | MB-09-012 | Land title | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-013 | Strata title | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-09-014 | Sale and Purchase Agreement | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
@@ -867,3 +867,7 @@ The application directory initially contained Prompt 004 report text and generat
 Three role-specific dashboard homes and the private invitation-link presentation were added to the recovered Prompt 003 source. Development text was removed from rendered main pages. A provider-neutral AI contract was added without a live model. The owner confirmed the preview in their own browser; all three role homes were browser checked, including mobile and desktop layouts. Final regression: 64/64; typecheck and isolated build passed. This is a verified M1.1 dashboard slice, not acceptance of missing payments, maintenance, reviews, passport, map or verification systems. The canonical register above is unchanged: TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 49; NOT STARTED 773; BLOCKED 0; TOTAL 839 (0.00% broad-requirement tested). No identifier was added, removed or counted twice. See DEVELOPMENT-REPORT.md and docs/reports/0005-m11 for evidence.
 
 The recipient-bound invitation was also accepted by the sample tenant through the browser. A mutually confirmed relationship persisted after refresh; its future start date is shown separately from an active rental. This does not verify identity, ownership, payment or legal validity.
+
+## Prompt 006 M1.2 — 24 November 2026
+
+Seven focused listing checks and the final 71-test regression passed. A private listing draft now stores structured price, deposit, room, furnishing, availability and description fields; editing stores prior addresses and warns on duplicate addresses. Missing or forged map coordinates cannot publish a listing, and draft records are excluded from marketplace results. Browser save/refresh and mobile/desktop forms were checked. Google Maps access is unavailable, so M1.2 is PARTIAL; no map pin, Street View, walking route, photo pipeline or tenant marketplace UI was claimed. Five existing MB-09 clauses moved NOT STARTED → PARTIAL (001–004, 011); no IDs were added or removed. Current canonical counts: TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 54; NOT STARTED 768; BLOCKED 0; TOTAL 839; broad tested coverage 0.00%. See the current development report and `docs/MARKETPLACE-ROADMAP.md`.

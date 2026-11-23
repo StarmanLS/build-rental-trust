@@ -35,6 +35,10 @@ server.use('/api/v1',async(req:any,res:any)=>{
  if(req.path==='/viewings'&&req.method==='POST')return res.status(201).json(await service.recordViewing(user.id,req.body));
  const viewingMatch=req.path.match(/^\/viewings\/([^/]+)\/respond$/);if(viewingMatch&&req.method==='POST')return res.json(await service.respondViewing(user.id,viewingMatch[1],req.body));
  if(req.path==='/properties'&&req.method==='POST')return res.status(201).json(await service.createProperty(user.id,req.body));
+ if(req.path==='/listings'&&req.method==='GET')return res.json(await service.publishedListings());
+ const listingMatch=req.path.match(/^\/properties\/([^/]+)\/listing$/);if(listingMatch&&req.method==='POST')return res.json(await service.saveListing(user.id,listingMatch[1],req.body));
+ const listingStatusMatch=req.path.match(/^\/properties\/([^/]+)\/listing-status$/);if(listingStatusMatch&&req.method==='POST')return res.json(await service.changeListingStatus(user.id,listingStatusMatch[1],req.body));
+ const listingHistoryMatch=req.path.match(/^\/properties\/([^/]+)\/location-history$/);if(listingHistoryMatch&&req.method==='GET')return res.json(await service.listingHistory(user.id,listingHistoryMatch[1]));
  if(req.path==='/tenancies'&&req.method==='POST')return res.status(201).json(await service.createTenancy(user.id,req.body));
  let hm=req.path.match(/^\/tenancies\/([^/]+)\/handovers$/);
  if(hm&&req.method==='GET')return res.json(await handover.list(user.id,hm[1]));
