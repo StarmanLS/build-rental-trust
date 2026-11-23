@@ -1,12 +1,7 @@
-# Next task — approval required
+# BUILD RENTAL TRUST — next task
 
-## H. Recommended next task
-**Verify the existing database adapter against an isolated standard PostgreSQL server.**
-- Objective: run migrations, auth and tenancy/evidence/handover/API tests against disposable server PostgreSQL and correct demonstrated adapter/transaction differences.
-- Requirements: MB-25/26/31/32.
-- Priority: local PGlite and HTTP tests pass, but the later deployment target remains unvalidated.
-- Dependencies: owner approval for the next task and an isolated PostgreSQL test service; do not use the existing .local database or any INTAN/MyilmiAI database. Service installation/credentials may need setup approval if unavailable.
-- Expected result: repeatable documented server-database checks and accurate deployment-readiness evidence, without claiming full release completion.
-- Required tests: fresh/repeated migrations, reopen persistence, transaction rollback/concurrency, auth sessions, tenancy isolation, document quarantine, handover responses/export and current 59 regressions/build/typecheck.
-- Not started. Stop for the next development prompt.
+## M1.2: property location and verification
 
+Objective: require a confirmed map pin for property registration and distinguish identity, ownership and rental authority in a permission-controlled submission/review flow. Requirements: MB-08/09/22/28/31/32. Priority: property records currently lack confirmed coordinates and claims cannot be independently reviewed. Dependencies: approved Maps access, secure evidence handling, reviewer roles and audit design. Expected result: location persisted on create/edit/refresh, honest pending-review states and authorized decisions without automatic verification claims. Tests: invalid/missing/forged pins, access by unrelated users, evidence upload/review, mobile/keyboard, regression/build/typecheck.
+
+Do not begin M1.2 until the next development prompt. AI provider activation, paid services, bank/CCRIS/CTOS/MyDigital ID/WhatsApp integrations and later modules remain separate approvals and milestones. Preserve `.local`, existing migrations, the 839-ID register and the current preview.

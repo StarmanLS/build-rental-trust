@@ -1,19 +1,16 @@
-# Known issues — Prompt 003
+# BUILD RENTAL TRUST — known issues at M1.1
 
-## D. Defects and blockers
-| ID | Severity | Description / affected feature / impact | Recommended fix | Blocking status |
-|---|---|---|---|---|
-| RT-010 | Medium, resolved | Unsupported charset exposed default HTML API error response. | Shared API parser handler now returns JSON 415; regression passes. | Resolved for demonstrated case |
-| RT-007 | Medium, partially resolved | Evidence/handover HTTP coverage now exists; broader release/security/accessibility/load/restore checks absent. | Continue staged verification. | Full release acceptance blocked |
-| RT-002 | High | Standard PostgreSQL and hosted CI outcomes unverified. | Next recommended database verification. | Deployment assurance blocked |
-| RT-003 | High | Production scanning/encrypted storage and handover photos absent; PDFs quarantined. | Complete private file pipeline. | Real-file workflows blocked |
-| RT-004 | High | Production email/MFA/recovery and trusted-client-IP configuration unresolved. Tests use fictional forwarded client addresses only. | Configure and test production auth/proxy trust. | Production access blocked |
-| RT-005 | High | Real-data privacy/legal and demand validation unresolved. | Owner/adviser validation. | Real-data pilot blocked |
-| RT-006 | Medium | Label-based handover matching; photos/signatures/settlement incomplete. | Stable item identities and scoped workflows. | Full D3 incomplete |
-| RT-008 | Low | Preview reconnection after restart can be stale; process not restarted in this cycle. | Improve graceful restart/reconnection. | Non-blocking locally |
-| RT-009 | Low | Historical sibling-research links require original workspace. | Separately approve publishable research bundle if needed. | No build block |
+| ID | Severity | Description / affected feature | Current impact | Recommended fix | Blocking |
+|---|---|---|---|---|---|
+| RT-008 | High, locally resolved | Preview was refused because no server/source was present; earlier shutdown left a dev lock. | Current port 5199 runs and restarts cleanly, but a local process must remain running. | Keep server alive; use `npm run dev` if host session ends. | No current block |
+| RT-014 | High | Prompt 004 source and original local DB were absent; only report text survived. | Historical 75-test and Maps/verification claims cannot be reproduced. | Recover a separate verified backup if one exists; otherwise reimplement in later milestones. | Recovery gap |
+| RT-011 | High | Mandatory map pin and persisted coordinates missing. | Property registration lacks location confirmation. | M1.2 Maps integration and validation. | M1.2 |
+| RT-012 | High | Identity, ownership and rental-authority evidence/review absent. | Claims remain unverified. | Secure evidence storage, reviewer roles, audit and seven-state review. | Verification |
+| RT-013 | High | Payments, maintenance, reviews, passport and future viewing schedules have no complete record workflows. | Dashboard tiles use honest empty states. | Implement in their approved milestones with permission checks. | Full product |
+| RT-015 | Medium | No approved AI provider, consent store, redaction/audit pipeline or live AI workflow. | AI contract tested; no AI result generated. | Approve provider/data handling and add scoped integration. | Live AI |
+| RT-004 | High | Production email/MFA/recovery and trusted proxy policy incomplete. | Local accounts only; shared rate-bucket warning may appear. | Configure and test before real users. | Production |
+| RT-003 | High | Real-file scanning and storage absent; PDFs stay quarantined. | Real document workflow unavailable. | Secure file pipeline. | Real files |
+| RT-002 | High | Standard PostgreSQL deployment and hosted CI unverified. | Deployment assurance incomplete. | Separate infrastructure validation. | Deployment |
+| RT-005/006/007/009 | Medium | Legal/privacy pilot, complete handover, broad accessibility/security acceptance and research bundle remain open. | Release readiness incomplete. | Follow approved staged roadmap. | Release |
 
-RT-001 (missing Git baseline) remains resolved. Prior K-01–K-12 and earlier reports preserved. No unauthorized-access defect was observed in the defined cases; this is not a full security assessment.
-
-
-Historical issue records retained under docs/reports/0003/previous-KNOWN-ISSUES.md and earlier cycles.
+Prior issue history is preserved in `docs/reports/0001/` through `0003/` and `docs/reports/0004-unpushed/`. No issue was silently removed.
