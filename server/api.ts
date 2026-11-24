@@ -5,6 +5,7 @@ import type {DatabasePort} from './db';
 import {RentalService,DomainError} from './domain';
 import {EvidenceService} from './evidence';
 import {HandoverService} from './handover';
+import {mapsConfig} from './maps';
 import {ZodError} from 'zod';
 
 // Shared by the local Nest bootstrap and isolated real-HTTP tests.
@@ -30,6 +31,7 @@ server.use('/api/v1',async(req:any,res:any)=>{
  if(!session.user.emailVerified)throw new DomainError(403,'Verify your email in the local mailbox');
  const user=session.user;
  if(req.path==='/dashboard'&&req.method==='GET')return res.json({...await service.dashboard(user),user});
+ if(req.path==='/maps/config'&&req.method==='GET')return res.json(mapsConfig());
  if(req.path==='/me/role'&&req.method==='POST')return res.json(await service.selectRole(user.id,req.body));
  if(req.path==='/me/setup'&&req.method==='POST')return res.json(await service.completeSetup(user.id,req.body));
  if(req.path==='/viewings'&&req.method==='POST')return res.status(201).json(await service.recordViewing(user.id,req.body));
@@ -39,6 +41,7 @@ server.use('/api/v1',async(req:any,res:any)=>{
  const listingMatch=req.path.match(/^\/properties\/([^/]+)\/listing$/);if(listingMatch&&req.method==='POST')return res.json(await service.saveListing(user.id,listingMatch[1],req.body));
  const listingStatusMatch=req.path.match(/^\/properties\/([^/]+)\/listing-status$/);if(listingStatusMatch&&req.method==='POST')return res.json(await service.changeListingStatus(user.id,listingStatusMatch[1],req.body));
  const listingHistoryMatch=req.path.match(/^\/properties\/([^/]+)\/location-history$/);if(listingHistoryMatch&&req.method==='GET')return res.json(await service.listingHistory(user.id,listingHistoryMatch[1]));
+ const propertyLocationMatch=req.path.match(/^\/properties\/([^/]+)\/location$/);if(propertyLocationMatch&&req.method==='POST')return res.json(await service.confirmLocation(user.id,propertyLocationMatch[1],req.body));
  if(req.path==='/tenancies'&&req.method==='POST')return res.status(201).json(await service.createTenancy(user.id,req.body));
  let hm=req.path.match(/^\/tenancies\/([^/]+)\/handovers$/);
  if(hm&&req.method==='GET')return res.json(await handover.list(user.id,hm[1]));

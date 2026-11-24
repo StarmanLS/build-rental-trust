@@ -1,10 +1,11 @@
-# BUILD RENTAL TRUST — known issues at M1.2
+# BUILD RENTAL TRUST — known issues at M1.2A
 
 | ID | Severity | Description / affected feature | Current impact | Recommended fix | Blocking |
 |---|---|---|---|---|---|
 | RT-008 | High, locally resolved | Preview was refused because no server/source was present; earlier shutdown left a dev lock. | Current port 5199 runs and restarts cleanly, but a local process must remain running. | Keep server alive; use `npm run dev` if host session ends. | No current block |
 | RT-014 | High | Prompt 004 source and original local DB were absent; only report text survived. | Historical 75-test and Maps/verification claims cannot be reproduced. | Recover a separate verified backup if one exists; otherwise reimplement in later milestones. | Recovery gap |
-| RT-011 | High | No approved Maps credential/billing/configuration; mandatory pin, autocomplete and Place ID submission are unavailable. | Listing drafts cannot be published or shown in the marketplace. | Add approved Maps picker, server-side validation and manual evidence review. | M1.2 publication |
+| RT-011 | High | No approved Maps credential/billing/configuration; the gated picker and Place Details path cannot run live. | No actual address search, moved pin or saved Google location has been verified; listings remain private. | Owner-approved billing and restricted keys, then real browser workflow verification. | M1.2A acceptance |
+| RT-018 | Medium | The configured Google Maps path has only mocked provider tests. | Script loading, key restrictions, actual Places response, drag and refresh behavior are unverified against Google. | Activate only after approval and test all steps with a real place in the browser. | Live Maps acceptance |
 | RT-016 | High | Photograph pipeline, Street View availability and route services are absent. | Listings remain text-only drafts; no imagery or walking/MRT claim can be shown safely. | Add scanned photo storage, approved imagery availability checks and route-backed distances. | Full listing |
 | RT-017 | Medium | Duplicate address warning is string-based only. | Conflicting pins/units cannot be detected without Maps evidence. | Compare Place IDs, coordinates, unit identifiers and prior-location history with human review. | Location integrity |
 | RT-012 | High | Identity, ownership and rental-authority evidence/review absent. | Claims remain unverified. | Secure evidence storage, reviewer roles, audit and seven-state review. | Verification |

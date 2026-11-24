@@ -1,0 +1,5 @@
+# BUILD RENTAL TRUST — next task
+
+**Finish M1.2 map-backed location and listing publication.** Connect approved Google Maps address autocomplete, draggable pin and explicit confirmation; persist Place ID and validated coordinates; compare address/place/pin, flag large changes and duplicates, and preserve history. Add an evidence-review path before showing an independently confirmed badge. Publish only eligible listings; show them to tenants. Check Street View availability and imagery date, and calculate walking routes only from supported route data. This is prioritized because current listings cannot be published safely. Dependency: owner-approved Maps access/billing and secure configuration. Test permissions, invalid/missing pins, refresh, duplication/conflicts, desktop/mobile, tenant visibility and API failure behavior.
+
+Then, in separate approved milestones: M1.3 tenant rental requests/map discovery/budget and hard-constraint matching; M1.4 consent-controlled offers and viewings. Keep photo scanning/storage and ownership/agent authority review on the prerequisite list. Do not treat the provider-neutral AI contract as a live AI feature.
