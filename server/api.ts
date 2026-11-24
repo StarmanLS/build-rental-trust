@@ -5,13 +5,14 @@ import type {DatabasePort} from './db';
 import {RentalService,DomainError} from './domain';
 import {EvidenceService} from './evidence';
 import {HandoverService} from './handover';
+import {PropertyVerificationService} from './property-verification';
 import {mapsConfig} from './maps';
 import {ZodError} from 'zod';
 
 // Shared by the local Nest bootstrap and isolated real-HTTP tests.
 export function mountApi(server:express.Express,pg:DatabasePort,auth:ReturnType<typeof createAuth>,baseURL:string){
  const port=new URL(baseURL).port;
- const service=new RentalService(pg,baseURL),evidence=new EvidenceService(pg),handover=new HandoverService(pg);
+ const service=new RentalService(pg,baseURL),evidence=new EvidenceService(pg),handover=new HandoverService(pg),propertyReview=new PropertyVerificationService(pg);
 server.use((req:any,res:any,next:any)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('Referrer-Policy','no-referrer');if(req.path.startsWith('/api/'))res.setHeader('Cache-Control','no-store');if(!['localhost:'+port,'127.0.0.1:'+port].includes(req.headers.host)){res.status(403).json({message:'Local preview only'});return}next();});
 // Better Auth receives the original stream, before JSON parsing.
 server.use('/api/auth',toNodeHandler(auth));
@@ -30,7 +31,24 @@ server.use('/api/v1',async(req:any,res:any)=>{
  if(!session.user.email.endsWith('@example.invalid'))throw new DomainError(403,'Use a synthetic @example.invalid account in this preview');
  if(!session.user.emailVerified)throw new DomainError(403,'Verify your email in the local mailbox');
  const user=session.user;
- if(req.path==='/dashboard'&&req.method==='GET')return res.json({...await service.dashboard(user),user});
+ if(req.path==='/dashboard'&&req.method==='GET')return res.json({...await service.dashboard(user),reviewer:await propertyReview.isReviewer(user.id),user});
+ if(req.path==='/property-reviews'&&req.method==='GET')return res.json(await propertyReview.listQueue(user.id));
+ let pv=req.path.match(/^\/properties\/([^/]+)\/verification$/);
+ if(pv&&req.method==='GET')return res.json(await propertyReview.details(user.id,pv[1]));
+ if(pv&&req.method==='POST')return res.json(await propertyReview.saveRelationship(user.id,pv[1],req.body));
+ pv=req.path.match(/^\/properties\/([^/]+)\/verification\/submit$/);
+ if(pv&&req.method==='POST')return res.json(await propertyReview.submit(user.id,pv[1]));
+ pv=req.path.match(/^\/properties\/([^/]+)\/verification\/decision$/);
+ if(pv&&req.method==='POST')return res.json(await propertyReview.decide(user.id,pv[1],req.body));
+ pv=req.path.match(/^\/properties\/([^/]+)\/evidence$/);
+ if(pv&&req.method==='POST')return res.status(201).json(await propertyReview.uploadEvidence(user.id,pv[1],req.body));
+ pv=req.path.match(/^\/property-evidence\/([^/]+)\/download$/);
+ if(pv&&req.method==='GET'){const d=await propertyReview.evidenceBytes(user.id,pv[1]);res.setHeader('Content-Type','text/plain; charset=utf-8');res.setHeader('Content-Disposition',`attachment; filename="${d.filename}"`);res.setHeader('Content-Security-Policy',"sandbox; default-src 'none'");return res.send(d.bytes)}
+ pv=req.path.match(/^\/properties\/([^/]+)\/photos$/);
+ if(pv&&req.method==='POST')return res.status(201).json(await propertyReview.uploadPhoto(user.id,pv[1],req.body));
+ pv=req.path.match(/^\/property-photos\/([^/]+)$/);
+ if(pv&&req.method==='GET'){const d=await propertyReview.photoBytes(user.id,pv[1]);res.setHeader('Content-Type',d.mime);return res.send(d.bytes)}
+ if(pv&&req.method==='POST')return res.json(await propertyReview.photoAction(user.id,pv[1],req.body));
  if(req.path==='/maps/config'&&req.method==='GET')return res.json(mapsConfig());
  if(req.path==='/me/role'&&req.method==='POST')return res.json(await service.selectRole(user.id,req.body));
  if(req.path==='/me/setup'&&req.method==='POST')return res.json(await service.completeSetup(user.id,req.body));

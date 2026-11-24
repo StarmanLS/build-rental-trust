@@ -2,57 +2,65 @@
 
 **Report information**
 
-- Prompt 007, M1.2A. 24 November 2026, 08:30 MYT. Branch `main`; origin `https://github.com/StarmanLS/build-rental-trust.git`. Pre-cycle commit `de6dd31f98764e7360b931af082af797a97169f5`; final commit is in Git log and the delivery message.
-- Stage: Google Maps property location. **PARTIAL** because no owner-approved Maps billing, keys or activation flag exist. The app and current `.local` database were preserved.
+- Prompt 008; 24 November 2026, 14:41 MYT; M1.2B property verification and photographs.
+- Branch `main`; origin `https://github.com/StarmanLS/build-rental-trust.git`; pre-cycle commit `d21dedd6efde2e3fa98f3a9d77cb7cbf4a37ea80`. Final commit is the next commit in Git log and the delivery message.
+- Overall status: **PARTIAL**, local synthetic application. Existing `.local` data and migrations preserved.
 
 ## A. Work completed
 
-| Requirement | Actual implementation | Files | Status |
+| Requirement | Description / actual implementation | Files changed | Status |
 |---|---|---|---|
-| MB-09/28 | Added a conditional Google Place Autocomplete (New) address search, interactive map, draggable pin, keyboard coordinate fields and explicit confirmation button inside the listing editor reached immediately after property registration. Existing properties can reopen the editor. | `app/map-location-picker.tsx`, `app/listing-editor.tsx`, `app/globals.css` | Implemented behind configuration; live map untested |
-| MB-09/22/31 | Server checks claim access before Place Details access, validates Place ID and coordinates, rejects a pin over 5 km from the selected place, flags >150 m offsets/address differences/duplicate place+unit/conflicting addresses/significant moves, stores prior location, and saves submitted or under-review status. Provider errors do not save a false location. | `server/maps.ts`, `server/domain.ts`, `server/api.ts` | 6 new focused tests; live provider untested |
-| MB-09/28 | Publication requires a saved valid place/pin and reviewed ownership or rental authority. Under-review pins and unverified claims remain private; marketplace reads enforce both conditions. | `server/domain.ts`, `tests/listings.test.ts` | Automated tests passed; approval workflow absent |
-| MB-31 | Separate browser and server key settings with explicit `GOOGLE_MAPS_APPROVED=1` gate; no key is committed or loaded now. Exact restrictions documented. | `.env.example`, `docs/MAPS-CONFIGURATION.md`, `server/maps.ts` | Configuration ready; not activated |
+| MB-08/09 | Five property relationships now save separately from the legacy claim role. Identity, ownership, authority, and overall review have separate states. Existing properties display their original claim role. | `server/domain.ts`, `server/property-verification.ts`, `app/page.tsx`, `app/property-workspace.tsx`, migration 007 | Partial: identity cannot be verified in this cycle |
+| MB-09-008/012–018 | Claimants can attach private TXT/PDF evidence by category. Bytes, SHA-256, original filename, category, uploader and time persist. Invalid sizes/types rejected; PDFs quarantined. Evidence download requires claimant/reviewer authorization. | property verification service, API, migration 007, UI | Local synthetic workflow tested at service level; production scanning/storage absent |
+| MB-08-003/004 | Reviewer grant is seeded for a separate local reviewer account; reviewer queue and decision form support reasons, correction requests, approval/rejection/expiry/suspension and append-only decision history. Self-review denied. Verified ownership and authority are separate; uploading never verifies. | `server/main.ts`, service, API, UI | Partial: full browser review path not completed |
+| MB-09/28 | Claimant-only photo upload, private thumbnails, room labels, cover choice, reordering, outdated flag and soft removal. Image signatures/size checked; no public image reuse. | service, API, migration 007, UI/CSS | Service tested; browser upload untested |
+| MB-09/28 | Dashboard shows draft, pending location, pending authority, eligible, published, paused, withdrawn or rejected from current records. Existing publication still requires Google location and reviewed claim. | `server/domain.ts`, `app/page.tsx` | Focused tests passed; live publication unavailable |
+| MB-31 | Existing API session, origin, rate and synthetic-account restrictions applied to new routes. Reviewer and resource permissions enforced by server. | `server/api.ts`, service | Service permission tests passed |
+
+No live AI function, Google Maps call, paid service or new dependency was added. Future AI can use document/photo category, SHA-256, uploader, timestamps, property linkage and reviewer decision references; no extraction or generated result is claimed.
 
 ## B. Tests and verification
 
-- Final regression **77/77 passed**, 0 failed, 0 skipped. Typecheck passed. Isolated production build passed while preview continued running. Existing M1.1 roles/invitations and M1.2 listing tests remained green.
-- The first full run had 75/77 passing: one test reused an address with a conflicting place claim and another expected the wrong warning phrase. The assertions were corrected; focused listing tests then passed 13/13 and the final full regression passed 77/77. No product failure was concealed.
-- Database: existing migration 006 reused; no migration or data reset. Tests verified persisted coordinates after database reopen, history, address-change invalidation and duplicate warnings.
-- Browser: landlord opened the listing editor on the local preview; desktop and 390px mobile both showed the accurate unavailable state with no horizontal overflow. Console errors/warnings: none. Screenshots of that state were captured in the browser session, not exported as files. **Address lookup, drag, confirmation and refresh of a live Google-selected place were not executable or browser-verified** because the keys and approval are absent.
-- Security: unauthorized claimants are refused before a potential billable Place Details request; malformed pins and unsupported places fail; publication and marketplace reads enforce authority. No real external Google or AI calls occurred.
+- **Final full regression:** 79 passed, 0 failed, 0 skipped (`npm test` with local HTTP bind permission). First restricted run failed 13 HTTP tests with `listen EPERM`; one existing test expected six migrations. Migration assertion updated to seven; approved rerun passed. Three focused service tests passed. They cover submission/approval separation, self/unrelated access, agent correction history after database reopen, private photo bytes, outdated flag and soft removal. The third test was added after the 79-test full run and passed separately.
+- **After final dashboard query edit:** focused domain/listing/property-review tests 36/36 passed. Typecheck passed. Isolated production build passed; preview build assets were not disturbed.
+- **Database:** migration 007 applied successfully in test databases and in the existing local preview without reset. Reopen persistence test passed. Local `.local` database remains excluded from Git.
+- **Browser:** Chrome on the user's computer loaded the landlord dashboard and verification modal at desktop and 390px mobile widths. Saved the legacy property-manager relationship; a no-evidence submission correctly returned a validation error. Reviewer account signed in and showed its gated Reviews tab and empty queue. Screenshots were captured in the browser session but could not be exported as repository files. Chrome extension file chooser refused `setFiles` because its “Allow access to file URLs” setting is off; evidence/photo upload, pending claim, reviewer decision and photo organization were therefore **not browser verified**. This is an automation limitation, not a claimed product pass. No console audit was run this cycle.
+- **Preview:** `127.0.0.1:5199` listener remains running and an approved local HTTP check returned 200 after final restart. Chrome had loaded successfully before that last restart; user-side access after it has not been reconfirmed.
+- **Security:** unrelated user and claimant self-approval rejected in service tests. PDF download rejected while quarantined. Identity approval is blocked until a separate identity workflow exists. Production security acceptance not achieved.
 
 ## C. Requirement status
 
-Canonical 839 IDs unchanged: TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 54; NOT STARTED 768; BLOCKED 0; TOTAL 839. Broad tested percentage **0.00%**. No ID or broad status moved this cycle: existing MB-09/28/31 contracts remain partial despite narrow tests. M1.2A is not accepted until a real Google address, moved pin, confirmation, save and refresh are observed.
+Canonical 839 IDs retained: TESTED **0**; IMPLEMENTED — NOT TESTED **17**; PARTIAL **74**; NOT STARTED **748**; BLOCKED **0**; TOTAL **839**. Broad tested percentage **0.00%**. Twenty IDs moved NOT STARTED → PARTIAL, listed in `PROJECT-STATUS.md`; no ID removed. Current M1.2B stage is **PARTIAL**, not accepted. These are exact register counts, not an estimate of feature completeness.
 
 ## D. Defects and blockers
 
-| ID | Severity | Impact / recommended fix | Blocking |
-|---|---|---|---|
-| RT-011 | High | No approved Google Maps keys/billing. Live map cannot load or confirm a location. Owner-approved configuration and real browser verification needed. | M1.2A acceptance |
-| RT-018 | Medium | Enabled-path UI and Google API behavior are untested against real services; key restrictions and quota cannot be verified without configuration. | Live Maps acceptance |
-| RT-012 | High | No ownership/rental-authority review interface; therefore no listing can be published even after pin submission. Build M1.2B review. | Publication |
-| RT-016/017 | Medium–high | Photos, Street View, walking routes and stronger location/unit-conflict review remain absent. | Full marketplace |
+| ID | Severity | Description / impact | Fix | Blocking |
+|---|---|---|---|---|
+| RT-011 | High | No approved Google Maps keys/billing; no live location confirmation or publication. | Configure restricted keys after owner approval and run live browser flow. | Publication/M1.2A acceptance |
+| RT-003 | High | Local text/PDF and image storage lacks production scanning, encryption-at-rest/key management and retention controls. PDFs quarantined. | Build approved secure storage/scanning pipeline. | Real documents/photos |
+| RT-019 | Medium | Chrome automation extension cannot attach local files with its current file-URL setting. End-to-end upload/review/photo proof is incomplete. | Use a permitted browser upload test or enable the extension setting with owner approval; retest. | M1.2B browser acceptance |
+| RT-020 | High | No independent identity verification; identity status intentionally stays not started. | Add approved identity evidence/provider and reviewer safeguards. | Identity acceptance |
+| RT-021 | Medium | Image metadata/EXIF stripping, content scanning and original photo evidence version policy are incomplete. | Implement before production photo use. | Production photos |
+| RT-022 | Medium | Reviewer queue does not refresh automatically after a decision; a page reload shows saved state. | Refresh queue after decision. | UX only |
 
-Older recovery and production issues remain in `KNOWN-ISSUES.md` and archived reports.
+Other prior issues remain in `KNOWN-ISSUES.md` and archived reports.
 
 ## E. Research alignment
 
-Used Google's current Place Autocomplete (New), Place Details (New), Maps loading and key-restriction documentation. The server requests only `id,formattedAddress,location`; location is explicitly user-submitted and never an ownership badge. The product differs from the intended live workflow only because the approved services are unavailable. Owner approval is required before billing and key activation. No AI-generated location claim was added.
+Kept identity, ownership and rental authority separate, and kept human decisions with reasons/audit history. The local workflow differs from production research because it accepts only synthetic test files and quarantines PDF evidence; no external registry or government API was assumed. Real identity, document privacy and legal evidence standards need Malaysian adviser review before activation. No paid integration decision was made.
 
 ## F. Architecture and database changes
 
-New `server/maps.ts`, `app/map-location-picker.tsx`, `docs/MAPS-CONFIGURATION.md`; modified `server/api.ts`, `server/domain.ts`, listing editor/CSS, `.env.example`, listing tests. API changes: authenticated `GET /api/v1/maps/config` and claimant-only `POST /api/v1/properties/:id/location`. Database migrations: **none**; migration 006 already had coordinate, Place ID, status and history fields. New dependencies: **none**. Live AI changes: **none**. External calls in this environment: **none**.
+New modules: `server/property-verification.ts`, `app/property-workspace.tsx`. Modified modules: domain, API, main, page, CSS, tests. Migration: `007-property-verification-photos.sql` adds verification, evidence, decisions, reviewer grants and photo tables. Dependencies: none. API: authenticated property verification/evidence/photo routes and reviewer queue; dashboard includes reviewer grant. Security: server-side claim/reviewer access checks, local synthetic file gate, bounded uploads and quarantined PDFs. AI: metadata/source references only; no provider call.
 
 ## G. Remaining work
 
-Owner-approved Google Maps Platform billing plus restricted browser/server keys; live autocomplete/map/drag/confirmation/refresh verification and actual screenshots; ownership and agent-authority evidence review; secure photographs; publication and tenant visibility; Street View and route-backed transport. M1.3/M1.4 remain future milestones. The owner has not re-confirmed access to this restarted preview in their browser.
+Complete browser upload → pending → reviewer correction/decision → refreshed status → photo organization on real UI; production scanning/storage, EXIF stripping, identity verification, live Maps, publication, photo evidence version policy, legal/privacy review. Other Module 1 milestones (payments, maintenance, reviews, passport) remain future work. No Google credentials were present this cycle.
 
 ## H. Recommended next task
 
-**Complete live M1.2A acceptance, then begin M1.2B property verification.** Dependency: owner-approved Maps billing and restricted keys. First verify actual address search, moved pin, explicit confirmation, persisted coordinates after refresh, failure handling and mobile keyboard use in the browser. Then M1.2B can add property evidence, ownership/authority review, scanned photos and controlled publication. Do not treat the current gated implementation as a completed live integration.
+**Finish M1.2B browser acceptance and safe file pipeline.** Cover MB-08/09/31. Priority: the server workflow exists but cannot be accepted until upload, reviewer decisions and photo actions are observed end-to-end, and real documents need a secure processing path. Dependencies: a browser upload path that permits local synthetic files; production storage/scanner decisions for real files. Expected result: one synthetic claim and photo flow saved and refreshed in Chrome, with claimant/reviewer/outsider checks. Tests: upload validation, auth, decision history, photo changes, desktop/mobile browser and full regression if code changes warrant it.
 
 ## I. Continuation checkpoint
 
-Root `/Users/lesh/Desktop/Intan/rental-trust-app`; branch `main`; approved origin above. Preview [http://localhost:5199/](http://localhost:5199/) is listening on `127.0.0.1:5199`. Last verified: 77/77 regression, typecheck, isolated build, unavailable-state desktop/mobile browser check and empty console error list. Current `.local` data preserved. Read the five reports, `docs/MAPS-CONFIGURATION.md`, `app/map-location-picker.tsx`, `server/maps.ts`, `server/domain.ts` and `tests/listings.test.ts`. Exact next dependency: approved Maps configuration and live workflow verification; next planned module work: M1.2B.
+Project root `/Users/lesh/Desktop/Intan/rental-trust-app`; `main`; origin above. Last verified: 79/79 full regression, 36/36 focused after final query change, typecheck, isolated build, desktop/mobile Chrome property UI, local HTTP 200 on port 5199. Current stage M1.2B PARTIAL. Last completed narrow work: claimant/reviewer service and private photo management. Outstanding: browser file upload/full review, production security, live Maps. Exact next task is section H. Continue with this report, `PROJECT-STATUS.md`, `KNOWN-ISSUES.md`, `NEXT-STEPS.md`, `server/property-verification.ts`, `app/property-workspace.tsx`, migration 007 and tests. Preview: [http://localhost:5199/](http://localhost:5199/); keep server running. Prior report archived at `docs/reports/0007-m12a/`.

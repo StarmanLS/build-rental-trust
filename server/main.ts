@@ -14,9 +14,10 @@ await mkdir('.local',{recursive:true,mode:0o700});
 let secret:string;try{secret=await readFile('.local/auth-secret','utf8')}catch{secret=randomBytes(48).toString('hex');await writeFile('.local/auth-secret',secret,{mode:0o600,flag:'wx'})}
 const db=process.env.DATABASE_URL?await openPostgres(process.env.DATABASE_URL):await openDatabase('.local/postgres');const auth=createAuth(db,secret,baseURL);const service=new RentalService(db.pg,baseURL);
 // Explicit synthetic seed: account email verification here is fixture setup, not an identity check.
-for(const [name,email] of [['Aina','manager@example.invalid'],['Daniel','tenant@example.invalid'],['Unrelated User','outsider@example.invalid']]){
+for(const [name,email] of [['Aina','manager@example.invalid'],['Daniel','tenant@example.invalid'],['Unrelated User','outsider@example.invalid'],['Review Officer','reviewer@example.invalid']]){
  if(!(await db.pg.query('SELECT id FROM auth_user WHERE email=$1',[email])).rows.length){await auth.api.signUpEmail({body:{name,email,password:'LocalRental!2026'}});await db.pg.query('UPDATE auth_user SET email_verified=true WHERE email=$1',[email]);}
 }
+await db.pg.query("INSERT INTO reviewer_grants(user_id) SELECT id FROM auth_user WHERE email='reviewer@example.invalid' ON CONFLICT DO NOTHING");
 // Rename only the original fixture labels; account IDs, roles, and records stay intact.
 for(const [email,oldName,newName] of [['manager@example.invalid','Aina · Test Manager','Aina'],['tenant@example.invalid','Daniel · Test Tenant','Daniel'],['outsider@example.invalid','Unrelated · Test User','Unrelated User']]){
  await db.pg.query('UPDATE auth_user SET name=$3 WHERE email=$1 AND name=$2',[email,oldName,newName]);

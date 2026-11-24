@@ -1,14 +1,15 @@
 # Rental Trust — complete requirement status
 
-Checkpoint 0001 · 10 November 2026. Local synthetic implementation PARTIAL; not production-ready.
+Checkpoint 0008 · 24 November 2026. M1.2B property verification and private photo workflow PARTIAL; local synthetic preview, not production-ready.
 
-Canonical machine register: `../rental-trust-research/development-plan/requirements.json`. The table below retains all 839 unique identifiers, including 43 section prose contracts and 796 listed clauses. A section contract is not a second completion credit for its children. This is mixed-granularity register coverage, not estimated independent-feature completion. No IDs were added or removed this cycle. Owner additions map to existing scope: multi-role/agents MB-07/28; viewing section MB-07/10; future rental history/map/payment sharing MB-12/17/22; reporting protocol MB-33/36/37. The future passport specification preserves the detailed addition.
+Canonical machine register: `../rental-trust-research/development-plan/requirements.json`. The table retains all 839 existing unique identifiers. This mixed-granularity register includes section contracts and listed clauses; a section contract is not separate completion credit for its child clauses. No ID was added or removed. This cycle moved 20 existing IDs from NOT STARTED to PARTIAL: MB-08-003, MB-08-004, MB-08-005, MB-08-006, MB-08-007, MB-08-008, MB-08-009, MB-08-010, MB-08-011, MB-09-005, MB-09-006, MB-09-007, MB-09-008, MB-09-010, MB-09-012, MB-09-013, MB-09-014, MB-09-015, MB-09-017, MB-09-018. The local workflow implements parts of these contracts, but scanning, independent identity checks, live Maps, production storage and full browser upload acceptance remain open.
 
-TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 54; NOT STARTED 768; BLOCKED 0; TOTAL 839. Tested coverage 0.00%. D3 checkpoint scope MB-15/19: 42 entries, 19 PARTIAL, 23 NOT STARTED, 0 TESTED. Production blockers exist even when a broad requirement still allows synthetic implementation.
+TESTED 0; IMPLEMENTED — NOT TESTED 17; PARTIAL 74; NOT STARTED 748; BLOCKED 0; TOTAL 839. Broad tested coverage 0.00%. The M1.2B milestone is PARTIAL. Narrow automated tests passed 79/79 in the final full regression; see DEVELOPMENT-REPORT.md. Local browser upload was blocked by the Chrome extension file-access setting. Test results do not imply full acceptance of broad requirements.
 
-No existing module was declared fully TESTED. Narrow tests and browser evidence are in DEVELOPMENT-REPORT.md and docs/reports/0001. Historical before/after machine snapshots and prior research records remain preserved. 24 entries moved NOT STARTED → PARTIAL; the exact list is in docs/reports/0001/register-changes.json.
+Historical register text and earlier machine snapshots remain preserved in `docs/reports/0001/` through `0007-m12a/`.
 
 ## Full register
+
 
 | ID | Requirement | Implementation | Test status | Evidence / limitation |
 |---|---|---|---|---|
@@ -149,34 +150,34 @@ No existing module was declared fully TESTED. Narrow tests and browser evidence 
 | MB-08 | Full section contract, including all prose constraints; see source lines 314–358 | NOT STARTED | NOT STARTED | Planning pack only; no completion evidence; Plan/design only; no rental implementation or software tests |
 | MB-08-001 | Account authentication | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-08-002 | Identity verification | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-003 | Property ownership verification | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-004 | Agent authority verification | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-005 | Not started | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-006 | Pending | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-007 | Additional information required | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-008 | Verified | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-009 | Rejected | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-010 | Expired | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-08-011 | Suspended | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-08-003 | Property ownership verification | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-004 | Agent authority verification | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-005 | Not started | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-006 | Pending | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-007 | Additional information required | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-008 | Verified | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-009 | Rejected | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-010 | Expired | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-08-011 | Suspended | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
 | MB-09 | Full section contract, including all prose constraints; see source lines 359–400 | PARTIAL | PARTIAL | ../../rental-trust-app/docs/evidence/CHECKPOINT-2026-11-10.md; Synthetic foundation only; full section acceptance and production validation outstanding |
 | MB-09-001 | Property creation | PARTIAL | PARTIAL | Property creation is a private record; mandatory map and independent authority checks remain open. M1.2 browser and domain checks. |
 | MB-09-002 | Address information | PARTIAL | PARTIAL | Address saves and edits; address change history and duplicate warnings tested. No Maps consistency check. |
 | MB-09-003 | Property type | PARTIAL | PARTIAL | Property type saves in a listing draft; broader verification remains open. |
 | MB-09-004 | Unit details | PARTIAL | PARTIAL | Unit and building fields save; photos and location verification remain open. |
-| MB-09-005 | Ownership claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-006 | Agent authority claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-007 | Property management relationships | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-008 | Verification evidence | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-005 | Ownership claims | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-006 | Agent authority claims | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-007 | Property management relationships | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-008 | Verification evidence | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
 | MB-09-009 | Conflicting claims | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-010 | Verification status | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-010 | Verification status | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
 | MB-09-011 | Property history | PARTIAL | PARTIAL | Original address stored on edit; full property and location review history remains open. |
-| MB-09-012 | Land title | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-013 | Strata title | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-014 | Sale and Purchase Agreement | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-015 | Authorization letter | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-012 | Land title | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-013 | Strata title | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-014 | Sale and Purchase Agreement | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-015 | Authorization letter | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
 | MB-09-016 | Power of Attorney | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-017 | Property management agreement | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
-| MB-09-018 | Company authorization | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
+| MB-09-017 | Property management agreement | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
+| MB-09-018 | Company authorization | PARTIAL | PARTIAL | Local-only M1.2B claim/evidence/reviewer path with focused service tests; full production verification, scanning, legal review, and browser upload acceptance remain open. |
 | MB-10 | Full section contract, including all prose constraints; see source lines 401–437 | PARTIAL | PARTIAL | ../../rental-trust-app/docs/evidence/CHECKPOINT-2026-11-10.md; Synthetic foundation only; full section acceptance and production validation outstanding |
 | MB-10-001 | Property | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
 | MB-10-002 | Landlord | NOT STARTED | NOT STARTED | None; source requirement retained; Not implemented/verified independently |
