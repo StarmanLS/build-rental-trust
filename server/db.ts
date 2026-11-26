@@ -12,7 +12,7 @@ export async function migrate(pg:DatabasePort){
  await pg.exec('CREATE TABLE IF NOT EXISTS migrations (version integer PRIMARY KEY, applied_at timestamptz DEFAULT now())');
  // Additive metadata for the first local migration, already applied before file extraction.
  await pg.exec('ALTER TABLE migrations ADD COLUMN IF NOT EXISTS checksum text');
- for(const [version,file] of [[1,'001-foundation.sql'],[2,'002-role-onboarding.sql'],[3,'003-agent-viewings.sql'],[4,'004-tenancy-evidence.sql'],[5,'005-handovers.sql'],[6,'006-property-listings.sql'],[7,'007-property-verification-photos.sql']] as const){
+ for(const [version,file] of [[1,'001-foundation.sql'],[2,'002-role-onboarding.sql'],[3,'003-agent-viewings.sql'],[4,'004-tenancy-evidence.sql'],[5,'005-handovers.sql'],[6,'006-property-listings.sql'],[7,'007-property-verification-photos.sql'],[8,'008-document-reviewed-photo-history.sql']] as const){
   const sql=await readFile(new URL(`../db/migrations/${file}`,import.meta.url),'utf8');
   const digest=createHash('sha256').update(sql).digest('hex');
   await pg.transaction(async tx=>{

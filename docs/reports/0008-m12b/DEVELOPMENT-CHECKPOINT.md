@@ -1,0 +1,9 @@
+# BUILD RENTAL TRUST — M1.2B continuation checkpoint
+
+24 November 2026, 14:41 MYT. Root `/Users/lesh/Desktop/Intan/rental-trust-app`; branch `main`; origin `https://github.com/StarmanLS/build-rental-trust.git`. The final commit for Prompt 008 is the next commit after `d21dedd6efde2e3fa98f3a9d77cb7cbf4a37ea80` and is identified in the delivery message. Existing `.local` database and previous migrations were preserved; migration 007 applied additively.
+
+**State:** M1.2B PARTIAL. Local claimant relationship/evidence/photo and reviewer decision services and screens exist. Identity remains not started. PDF evidence remains quarantined. Property publication still requires both approved authority and a Google place/pin. No approved Google Maps credentials are present.
+
+**Verified:** final full regression 79/79, focused post-query edit 36/36, typecheck and isolated build passed. Chrome loaded the landlord verification screen at desktop and 390px mobile widths; reviewer account saw its restricted Reviews tab. Chrome extension blocked local file attachment, so browser evidence upload, reviewer decision and photo workflow were not completed. Local HTTP check returned 200 after the final preview restart; owner access after that restart was not reconfirmed. Preview remains listening at [http://localhost:5199/](http://localhost:5199/).
+
+**Exact next task:** complete synthetic browser upload → submitted claim → reviewer correction/decision → persisted claimant status → photo cover/reorder/stale/remove, then replace local file handling with approved secure storage/scanning before real documents. Do not activate Google billing, live AI or other paid services without owner approval. Read the five reports, `server/property-verification.ts`, `app/property-workspace.tsx`, migration 007, `tests/property-verification.test.ts` and `docs/MAPS-CONFIGURATION.md`. Earlier report history is archived in `docs/reports/0007-m12a/`.
